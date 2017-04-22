@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular.min.js"></script>
+  <script src="/elokchits/js/userscontroller.js"></script>
+   <link rel="stylesheet" href="/elokchits/css/styles.css">
+  
+  
+</head>
+<body data-spy="scroll" data-target=".navbar" data-offset="50">
+<nav class="navbar navbar-inverse" data-spy="affix" data-offset-top="197">
+<div class="container-fluid">
+<div class="navbar-header">
+<button type="button" class="navbar-toggle" data-toggle="collapse" data-
+
+target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="home1.html">elok</a>
+
+</div>
+<div class="collapse navbar-collapse navbar-right" id="myNavbar">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="home1.html">Home</a></li>
+          <li><a href="membershome.html">Members</a></li>
+          <li><a href="lothome.html">Lot Details</a></li>
+          <li><a href="partner.html">Partners</a></li>
+          <li><a href="auctionhome.html">Auction Home</a></li>
+          <li><a href="billgeneration.html">Bill Generation</a></li>
+          <li><a href="reports.html">Reports</a></li>
+           <li><a href="reports.html">Reports</a></li>
+           <li><a href="#" type="submit" class="s" data-toggle="modal" data-target="#myModal">Sign Up</a></li>
+           <li><a type="submit" class="signin " data-toggle="modal" data-target="#signin">Sign IN</a>
+           </li>
+        </ul>
+      </div>
+</div>
+</nav>
+<table id="my-ajax-table" class="table table-bordered" >
+ <thead>
+<div id="section1" class="container-fluid">
+<div class="container"> 
+<div class="row">
+<div class="col-sm-4">
+      <a href="membershome.html"> <div class="panel panel-primary">
+       <div class="panel-heading">Members</div>
+       <div class="panel-body"><img src="elokchits\WebRoot\resources\images\member.jpg" class="img-responsive" style="width:100%;height:10%" alt="Image"></div>
+       <div class="panel-footer">Add members Here</div>
+      </div></a>
+      
+</div>
+<div class="col-sm-4">
+      <a href="lothome.html"> <div class="panel panel-primary">
+       <div class="panel-heading">Lot Details</div>
+       <div class="panel-body"><img src="elokchits\WebRoot\resources\images
+
+\member.jpg" class="img-responsive" style="width:100%" alt="Image"></div>
+       <div class="panel-footer">Lot Information</div>
+      </div></a>
+      
+</div>
+<div class="col-sm-4">
+      <a href="partner.html"> <div class="panel panel-primary">
+       <div class="panel-heading">partners</div>
+       <div class="panel-body"><img src="elokchits\WebRoot\resources\images
+
+\partners.png" class="img-responsive" style="width:100%" alt="Image"></div>
+       <div class="panel-footer">your partner's information</div>
+      </div></a>
+</div>
+ </thead>
+
+<div class="container"> 
+<div class="row">
+<div class="col-sm-4">
+      <a href="auctionhome.html"> <div class="panel panel-primary">
+       <div class="panel-heading">Auction Home</div>
+       <div class="panel-body"><img src="elokchits\WebRoot\resources\images
+
+\loan.jpg" class="img-responsive" style="width:100%" alt="Image"></div>
+       <div class="panel-footer">Auction Related information</div>
+      </div></a>
+      
+</div>
+<div class="col-sm-4">
+      <a href="billgeneration.html"> <div class="panel panel-primary">
+       <div class="panel-heading">Bill Generation</div>
+       <div class="panel-body"><img src="elokchits\WebRoot\resources\images
+\bill.jpg" class="img-responsive" style="width:100%" alt="Image"></div>
+       <div class="panel-footer">Generates Bill Here</div>
+      </div></a>
+      
+</div>
+<div class="col-sm-4">
+      <a href="reports.html"> <div class="panel panel-primary">
+       <div class="panel-heading">Reports</div>
+       <div class="panel-body"><img src="elokchits\WebRoot\resources\images
+
+\reports.jpg" class="img-responsive" style="width:100%" alt="Image"></div>
+       <div class="panel-footer">Reports information</div>
+      </div></a>
+</div>
+
+<div  ng-app="user" ng-controller="userCtrl" class="signup">
+  
+  <!-- Trigger the modal with a button -->
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+     <form ng-submit="saveUser()" method="POST">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title" align="center">Register/Singnup</h4>
+        </div>
+        <div class="modal-body">
+         <form role="form">
+			    			<div class="row">
+			    				<div class="col-xs-6 col-sm-6 col-md-6">
+			    					<div class="form-group">
+			                <input type="text" ng-model="firstname" id="firstname" class="form-control input-sm" placeholder="First Name">
+			    					</div>
+			    				</div>
+			    				<div class="col-xs-6 col-sm-6 col-md-6">
+			    					<div class="form-group">
+			    						<input type="text" ng-model="lastname" id="lastname" class="form-control input-sm" placeholder="Last Name">
+			    					</div>
+			    				</div>
+			    			</div>
+<div class="row">
+<div class="col-xs-6 col-sm-6 col-md-6">
+<div class="form-group">
+	<input type="email" ng-model="email" id="email" class="form-control input-sm" placeholder="Email Address">
+    </div>
+                            </div>
+    
+			    				<div class="col-xs-6 col-sm-6 col-md-6">
+			    					<div class="form-group">
+    <input type="phone" ng-model="phonenumber" id="phonenumber" class="form-control input-sm" placeholder="phonenumber">
+    </div>
+                            </div>
+                            </div>
+
+			    			<div class="row">
+			    				<div class="col-xs-6 col-sm-6 col-md-6">
+			    					<div class="form-group">
+			    						<input type="password" ng-model="password" id="password" class="form-control input-sm" placeholder="Password">
+			    					</div>
+			    				</div>
+			    				<div class="col-xs-6 col-sm-6 col-md-6">
+			    					<div class="form-group">
+			    						<input type="password" name="password_confirmation" id="password_confirmation" class="form-control input-sm" placeholder="Confirm Password">
+			    					</div>
+			    				</div>
+			    			</div>
+			    			
+			    			
+			    		
+			    		</form>
+			 	    			
+        </div>
+        <div class="modal-footer">
+         <button ng-click="saveUser" type="button" class="btn btn-primary" data-dismiss="modal">Register</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        </div>
+        </form>
+      </div>
+      
+    </div>
+  </div>
+  
+<</div>
+
+<div class="sign in">
+ 
+  <!-- Trigger the modal with a button -->
+
+  <!-- Modal -->
+  <div class="modal fade" id="signin" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h3 class="modal-title" align="center">Sign in</h3>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+<div class="col-xs-6 col-sm-6 col-md-6">
+<div class="form-group">
+<label for="email">Email address:</label>
+	<input type="email" name="email" id="email" class="form-control input-sm" placeholder="Email Address">
+    </div>
+     </div>
+      </div>
+ <div class="row">
+ <div class="col-xs-6 col-sm-6 col-md-6">
+ <div class="form-group">
+ <label for="password">Password:</label>
+<input type="password" name="password" id="password" class="form-control input-sm" placeholder="Password">
+</div>
+</div>
+ </div>
+        
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Log in</button>
+           <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+
+</body>
+</html>

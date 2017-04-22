@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" 
+
+href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script 
+
+src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   <style>
+    body {
+      position: relative; 
+  }
+  .affix {
+      top:0;
+      width: 100%;
+      z-index: 9999 !important;
+  }
+  .navbar {
+      margin-bottom: 0px;
+  }
+
+  .affix ~ .container-fluid {
+     position: relative;
+     top: 50px;
+  }
+    </style>
+</head>
+<body data-spy="scroll" data-target=".navbar" data-offset="50">
+<nav class="navbar navbar-inverse" data-spy="affix" data-offset-top="197">
+<div class="container-fluid">
+<div class="navbar-header">
+<button type="button" class="navbar-toggle" data-toggle="collapse" data-
+
+target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="home1.html">elok</a>
+
+</div>
+<div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li><a href="home1.html">Home</a></li>
+          <li><a href="membershome.html">Members</a></li>
+          <li><a href="lothome.html">Lot Details</a></li>
+          <li><a href="partner.html">Partners</a></li>
+          <li><a href="auctionhome.html">Auction Home</a></li>
+          <li><a href="billgeneration.html">Bill Generation</a></li>
+          <li><a href="reports.html">Reports</a></li>
+           <li><a href="#" type="submit" class="s" data-toggle="modal" data-target="#myModal">Sign Up</a></li>
+           <li><a type="submit" class="signin " data-toggle="modal" data-target="#signin">Sign IN</a>
+           </li>
+        </ul>
+      </div>
+</div>
+</nav>
+
+<h1  align="center">Reports Home</h1>
+
+<div class="container-fluid" style="background-color:#e6f0ff;height:70px;">
+  
+ <div class="btn-group">
+ 
+     <br> <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+      Reticently Viewed <span class="caret"></span></button>
+      <ul class="dropdown-menu" role="menu">
+        <li><a href="#">New lot</a></li>
+        <li><a href="#">New Members</a></li>
+      </ul>
+    </div>
+    </div>
+    <br>
+    <br>
+   <button type="button"  class="btn btn-primary">Members Generation</button>
+<table border='0' align='center'><tr><td align='center'><h1>Member Report</h1></td></tr></table>
+<p>&nbsp;</p>
+<form id='formId' target = "_blank" action="<%=application.getContextPath() %>/member/partnerMembers" >
+<table border='0'  align='center'><tr><td><table align='center' cellpadding="0" cellspacing="0" width='100%' border="0" >
+<thead>
+<tr><td><font size="5">Select Partner</font></td><td> <select style='font-size:20px; height:50px' name="partnerId" id="partnerId" >
+	<option value="0">Select Referrer</option>
+              <c:if test="${!empty users }">
+<c:forEach items="${users}"  var="u"  >  
+	<option value="${u.userId}">${u.firstName},${u.lastName}</option>
+	</c:forEach></c:if>
+	</select></td>
+	<td><input type="submit" id = "myBtn" style="float: right;color: teal;border: 3pt ridge lightgrey" value="Search" 
+ width="50px" height="5px" /></td>
+</tr>
+</thead>
+
+</table>
+
+</body>
+</html>

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lot Details</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular.min.js"></script> 
+  <script src="/elokchits/js/lotcontroller.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+ <meta charset = "utf-8">
+      <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"
+         rel = "stylesheet">
+      <script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
+      <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+      </script>
+     <script lanaguage="javascript">
+    function Sbox()
+    {
+    if(document.getElementById("lottype").value=='2')
+    {
+
+        document.getElementById("afteramount").disabled=false;
+        document.getElementById("beforeamount").disabled=false;
+
+    }
+    else
+    {
+
+        document.getElementById("afteramount").disabled=true;
+        document.getElementById("beforeamount").disabled=true;
+
+    }
+    }
+</script>  
+<link rel="stylesheet" href="/elokchits/css/styles.css">
+      
+</head>
+<body data-spy="scroll" data-target=".navbar" data-offset="50">
+<nav class="navbar navbar-inverse" data-spy="affix" data-offset-top="197">
+<div class="container-fluid">
+<div class="navbar-header">
+<button type="button" class="navbar-toggle" data-toggle="collapse" data-
+
+target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="home1.html">elok</a>
+
+</div>
+<div class="collapse navbar-collapse navbar-right" id="myNavbar">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="home1.html">Home</a></li>
+          <li><a href="membershome.html">Members</a></li>
+          <li><a href="lothome.html">Lot Details</a></li>
+          <li><a href="partner.html">Partners</a></li>
+          <li><a href="auctionhome.html">Auction Home</a></li>
+          <li><a href="billgeneration.html">Bill Generation</a></li>
+          <li><a href="reports.html">Reports</a></li>
+           <li><a href="reports.html">Reports</a></li>
+           <li><a href="#" type="submit" class="s" data-toggle="modal" data-target="#myModal">Sign Up</a></li>
+           <li><a type="submit" class="signin " data-toggle="modal" data-target="#signin">Sign IN</a>
+           </li>
+        </ul>
+      </div>
+</div>
+</nav>
+<h1  align="center">Lot Home</h1>
+<div class="container-fluid" style="background-color:#e6f0ff;height:100px;">
+<br> <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+      Recently Viewed <span class="caret"></span></button>
+      <ul class="dropdown-menu" role="menu">
+        <li><a href="#">New lot</a></li>
+        <li><a href="#">New Members</a></li>
+      </ul>
+    
+  <div class="lotadd" ng-app="lot" ng-controller="lotCtrl">
+     
+  <div class="containe pull-right">
+  <!-- Trigger the modal with a button -->
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#mylotadd"> New Lot</button>
+</div>
+  <!-- Modal -->
+  <div class="modal fade" id="mylotadd" role="dialog">
+    <div class="modal-dialog">
+    <form ng-submit="saveLot()" method="POST">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title" align="center">Create New Lot</h4>
+        </div>
+<div class="modal-body">
+ <form role="form">
+	<div class="row">
+  <div class="col-xs-6 col-sm-6 col-md-6">
+  <div class="form-group">
+<input type="text" id="lotcode" ng-model="lotcode"  tabindex="1" required autocomplete="off" class="form-control input-sm" placeholder="Lotcode"/>
+
+</div>
+</div>
+<div class="col-xs-6 col-sm-6 col-md-6">
+<div class="form-group">
+<input type="number" id="commission" ng-model="commission" tabindex="2" maxlength="2"  min="1" required autocomplete="off" class="form-control input-sm" placeholder="Commission">
+			    					</div>
+			    				</div>
+			    			</div>
+<div class="row">
+<div class="col-xs-6 col-sm-6 col-md-6">
+<div class="form-group">
+	 <input type="text" id="sumamount" ng-model="sumamount" tabindex="3" required autocomplete="off" class="form-control input-sm"  placeholder="sumamount">
+    </div>
+    </div>
+    
+<div class="col-xs-6 col-sm-6 col-md-6">
+<div class="form-group">
+ <select ng-model="members" id="members" tabindex="4" class="form-control input-sm">
+<option value="0">Select No. of Members</option>
+<option value="20">20</option>
+<option value="25">25</option>
+<option value="30">30</option>
+<option value="40">40</option>
+<option value="50">50</option>
+</select> 
+    </div>
+    </div>
+     </div>
+     <div class="row">
+	<div class="col-xs-6 col-sm-6 col-md-6">
+  <div class="form-group">
+	<input type="text" id="description" ng-model="description" tabindex="6" required autocomplete="on" class="form-control input-sm" placeholder="description">
+</div>
+</div>
+<div class="col-xs-6 col-sm-6 col-md-6">
+<div class="form-group">
+	<input type="text" id="startdate" ng-model="startdate" tabindex="7" required autocomplete="on"  class="form-control input-sm" placeholder="startdate(13-03-2015)">
+	 </div>
+	</div>
+	</div>
+    <div class="row">
+	<div class="col-xs-6 col-sm-6 col-md-6">
+  <div class="form-group">
+	<select class="form-control input-sm" ng-model= "lottype" class="select" id="lottype" onchange="return Sbox();">
+<option value="-1">Select Lot Type</option>
+<option value="1">Open</option>
+<option value="2">Fixed</option>
+
+</select>	  
+</div>
+</div>
+<div class="col-xs-6 col-sm-6 col-md-6">
+<div class="form-group">
+	<input type="text" id="beforeamount" ng-model="beforeamount" tabindex="7" required autocomplete="on"   class="form-control input-sm" placeholder="beforeamount">
+	 </div>
+	</div>
+    <div class="col-xs-6 col-sm-6 col-md-6">
+<div class="form-group">
+	<input type="text" id="afteramount" ng-model="afteramount" tabindex="7" required autocomplete="on"   class="form-control input-sm" placeholder="afteramount ">
+	 </div>
+	</div>
+	</div>
+		   			
+	</form>
+			 	    			
+      </div>
+        <div class="modal-footer">
+         <button ng-click="saveLot" type="submit" class="btn btn-primary">SaveLot</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        </div>
+        </form>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+      
+      </div>
+ 
+</div>
+
+
+<div ng-app="lot" ng-controller="lotCtrl" ng-init="saveLot()">
+<table id="my-ajax-table" class="table table-bordered" >
+  <thead>
+    <th type="button" data-dynatable-column="name" class="dynatable-head">Lot Code</th>
+    <th type="button" data-dynatable-column="phone" class="dynatable-head">Sum Amount</th>
+    <th type="button" data-dynatable-column="ref" class="dynatable-head">No. of Members</th>
+    <th type="button" data-dynatable-column="address" class="dynatable-head">Company Commission</th>
+    <th type="button" data-dynatable-column="name" class="dynatable-head">Status</th>
+    <th type="button" data-dynatable-column="phone" class="dynatable-head">Before Amount</th>
+    <th type="button" data-dynatable-column="ref" class="dynatable-head">After Amount</th>
+    <th type="button" data-dynatable-column="address" class="dynatable-head">Edit</th>
+    <th type="button" data-dynatable-column="address" class="dynatable-head">Delete</th>
+   </thead>
+  <tbody>  
+   <tr ng-repeat="l in lots"><td style="text-align: left;"><a href="memberView.html">{{l.lotId}}</a></td><td style="text-align: left;">{{l.sumAmount}}</td><td style="text-align: left;">{{l.noOfMonths}}</td><td style="text-align: left;">{{m.commisionper}}</td> </td><td style="text-align: left;">{{l.status}}</td></td><td style="text-align: left;">{{l.beforeLiftAmount}}</td></td><td style="text-align: left;">{{l.afterLiftAmount}}</td><td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button></p></td>
+    <td><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></p></td>
+    </tr>
+  
+  </table>
+</div>
+
+</body>
+</html>

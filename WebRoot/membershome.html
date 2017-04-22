@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Member Home</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" 
+
+href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular.min.js"></script> 
+  
+  <script 
+
+src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+ <meta charset = "utf-8">
+      <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"
+         rel = "stylesheet">
+      <script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
+      <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+      <script src="/elokchits/js/membercontroller.js"></script>
+    <link rel="stylesheet" href="/elokchits/css/styles.css">
+
+</head>
+<body>
+<body data-spy="scroll" data-target=".navbar" data-offset="50">
+<nav class="navbar navbar-inverse" data-spy="affix" data-offset-top="197">
+<div class="container-fluid">
+<div class="navbar-header">
+<button type="button" class="navbar-toggle" data-toggle="collapse" data-
+
+target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="home1.html">elok</a>
+
+</div>
+<div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="home1.html">Home</a></li>
+          <li><a href="membershome.html">Members</a></li>
+          <li><a href="lothome.html">Lot Details</a></li>
+          <li><a href="partner.html">Partners</a></li>
+          <li><a href="auctionhome.html">Auction Home</a></li>
+          <li><a href="billgeneration.html">Bill Generation</a></li>
+          <li><a href="reports.html">Reports</a></li>
+          <li><a href="#" type="submit" class="s" data-toggle="modal" data-target="#myModal">Sign Up</a></li>
+           <li><a type="submit" class="signin " data-toggle="modal" data-target="#signin">Sign IN</a>
+           </li>
+        </ul>
+      </div>
+</div>
+</nav>
+<div class="container-fluid" style="background-color:#e6f0ff;height:100px;">
+  
+ <div class="btn-group">
+ 
+     <br> <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+      Recently Viewed <span class="caret"></span></button>
+      <ul class="dropdown-menu" role="menu">
+        <li><a href="#">New lot</a></li>
+        <li><a href="#">New Members</a></li>
+      </ul>
+    </div>
+    <div ng-app="member" ng-controller="memberCtrl" id ="memberadd">
+    <div class="signup">
+  <div class="containe pull-right">
+  <!-- Trigger the modal with a button -->
+  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">New Member</button>
+</div>
+<form ng-submit="saveMember()" method="POST">
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title" ng-model="dailogtitle" align="center">{{dailogtitle}}</h4>
+        </div>
+        <div class="modal-body">
+         <form role="form">
+			    			<div class="row">
+			    				<div class="col-xs-6 col-sm-6 col-md-6">
+			    					<div class="form-group">
+			                <input type="text"  name="first_name" id="first_name" class="form-control input-sm" ng-model="firstname" placeholder="First Name">
+			    					</div>
+			    				</div>
+			    				<div class="col-xs-6 col-sm-6 col-md-6">
+			    					<div class="form-group">
+			    						<input type="text" name="last_name" id="last_name" class="form-control input-sm" ng-model="lastname" placeholder="Last Name">
+			    					</div>
+			    				</div>
+			    			</div>
+<div class="row">
+<div class="col-xs-6 col-sm-6 col-md-6">
+<div class="form-group">
+	 <input type="phone" name="phonenumber" id="phonenumber" class="form-control input-sm" ng-model="phone" placeholder="phonenumber">
+    </div>
+    </div>
+    
+<div class="col-xs-6 col-sm-6 col-md-6">
+<div class="form-group">
+ <select ng-model="reference" id="reference" class="form-control input-sm">
+    <option value="0">Select correct Referrer</option>
+              <c:if test="suresh">
+<c:forEach items="users"  var="u"  >  
+	
+	<option value="userid">suresh</option>
+	</c:forEach></c:if>
+	</select> 
+    </div>
+    </div>
+     </div>
+     <div class="row">
+	<div class="col-xs-6 col-sm-6 col-md-6">
+  <div class="form-group">
+	<input type="text" id="address" ng-model="address"  autocomplete="on" class="form-control input-sm" placeholder="address">
+</div>
+</div>
+<div class="col-xs-6 col-sm-6 col-md-6">
+<div class="form-group">
+	<input type="email" id="email" ng-model="email"  autocomplete="on" class="form-control input-sm" placeholder="Email id">
+	 <input type="hidden" id="memId" ng-model="memId" >
+	
+	 </div>
+	</div>
+	</div>
+	    			
+	
+		 </form>	 	    			
+      </div>
+        <div class="modal-footer">
+         <button ng-click="saveMember" type="submit" class="savemember btn btn-primary">SaveMember</button>
+         
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        </div>
+       </form>
+      </div>
+      
+    </div>
+  </div>
+  </div>
+
+
+    
+<div ng-init="getMember()">
+<table id="my-ajax-table" class="table table-bordered" >
+  <thead>
+    <th type="button" data-dynatable-column="name" class="dynatable-head">Name</th>
+    <th type="button" data-dynatable-column="phone" class="dynatable-head">Address</th>
+    <th type="button" data-dynatable-column="ref" class="dynatable-head">Referrer</th>
+    <th type="button" data-dynatable-column="address" class="dynatable-head">Phone</th>
+    <th type="button" data-dynatable-column="address" class="dynatable-head">Edit</th>
+    <th type="button" data-dynatable-column="address" class="dynatable-head">Delete</th>
+   </thead>
+  <tbody>  
+   <tr ng-repeat="m in members"><td style="text-align: left;"><a href="memberView.html">{{ m.firstName}},{{ m.lastName}}</a></td><td style="text-align: left;">{{m.address}}</td><td style="text-align: left;">{{m.referName}}</td><td style="text-align: left;">{{m.phone}}</td> <td><p data-placement="top" data-toggle="tooltip"  title="Edit"><button class="btn btn-primary btn-xs" ng-click="editMember(m.memId)" data-target="#myModal" data-title="Edit" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button></p></td>
+    <td><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></p></td>
+    </tr>
+  
+  </table>
+  <ul>
+ <li>
+  <button type="button" ng-disabled="curPage == 0"
+ ng-click="curPage=curPage-1">PREV</button>
+ </li>
+ <li>
+ <span>Page {{curPage + 1}} of {{ numberOfPages() }}</span>
+ </li>
+ <li>
+ <button type="button"
+ ng-disabled="curPage >= datalists.length/pageSize - 1"
+ ng-click="curPage = curPage+1">NEXT </button>
+ </li>
+</ul>
+</div>
+
+</body>
+</html>

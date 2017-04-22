@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Member Details</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+ 
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+ <meta charset = "utf-8">
+      <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"
+         rel = "stylesheet">
+      <script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
+      <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+      
+      <!-- CSS -->
+      <style>
+         .ui-widget-header,.ui-state-default, ui-button {
+            background:#e6f0ff;
+            border: 1px solid #000;
+            color: #000;
+            font-weight: bold;
+         }
+      </style>
+      
+      <!-- Javascript -->
+      <script>
+         $(function() {
+            $( "#dialog-2" ).dialog({
+               autoOpen: false, 
+            
+               title: "Create a New Lot",
+               position: {
+                  my: "center",
+                  at: "center"
+               }
+            });
+            $( "#opener-2" ).click(function() {
+               $( "#dialog-2" ).dialog( "open" );
+            });
+         });
+          $(function() {
+            $( "#dialog-2" ).dialog({
+               autoOpen: false, 
+       
+               title: "Create a New Member",
+               position: {
+                  my: "center",
+                  at: "center"
+               }
+            });
+            $( "#opener-3" ).click(function() {
+               $( "#dialog-2" ).dialog( "open" );
+            });
+         });
+          
+      </script>
+  
+</head>
+<body data-spy="scroll" data-target=".navbar" data-offset="50">
+<nav class="navbar navbar-inverse" data-spy="affix" data-offset-top="197">
+  <div class="container-fluid">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="#">elok</a>
+    </div>
+    <div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li><a href="home1.html">Home</a></li>
+          <li><a href="membershome.html">Members</a></li>
+          <li><a href="lothome.html">Lot Details</a></li>
+          <li><a href="partner.html">Partners</a></li>
+          <li><a href="auctionhome.html">Auction Home</a></li>
+          <li><a href="billgeneration.html">Bill Generation</a></li>
+          <li><a href="reports.html">Reports</a></li>
+           <li><a href="#" type="submit" class="s" data-toggle="modal" data-target="#myModal">Sign Up</a></li>
+           <li><a type="submit" class="signin " data-toggle="modal" data-target="#signin">Sign IN</a>
+           </li>
+        </ul>
+      </div>
+    </div>
+ 
+</nav>  
+  <h1 align="center">Member Details</h1>
+
+<div class="container-fluid" style="background-color:#e6f0ff;height:100px;">
+  
+ <div class="btn-group">
+ 
+     <br> <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+      Recently Viewed <span class="caret"></span></button>
+      <ul class="dropdown-menu" role="menu">
+        <li><a href="#">New lot</a></li>
+        <li><a href="#">New Members</a></li>
+      </ul>
+    </div>
+    <br>
+     <div id = "dialog-2" style="background-color:#e6f0ff;
+     <div class="form">
+      <div class="tab-content">
+        <div id="signup">   
+          <h1>Member Details</h1>
+          <form action="<%=application.getContextPath() %>/member/add" method="post">
+          <div class="top-row">
+            <div class="field-wrap">
+              <label>
+                First Name<span class="req">*</span>
+              </label>
+              <input type="text" id="firstname" name="firstname" required autocomplete="off" />
+            </div>
+        
+            <div class="field-wrap">
+              <label>
+                Last Name<span class="req">*</span>
+              </label>
+              <input type="text" id="lastname" name="lastname" required autocomplete="off"/>
+            </div>
+          </div>
+          
+            <div class="top-row">
+            <div class="field-wrap">
+              <label>
+                Phone<span class="req">*</span>
+              </label><br>
+              <input type="text" id="phone" name="phone" required autocomplete="off" />
+            </div>
+            <div class="field-wrap">
+              <label>
+                Select Refferal<span class="req">*</span>
+              </label><br>
+              <select name="reference" id="reference" >
+    <option value="0">Select Referrer</option>
+              <c:if test="${!empty users }">
+<c:forEach items="${users}"  var="u"  >  
+	
+	<option value="${u.userId}">${u.firstName},${u.lastName}</option>
+	</c:forEach></c:if>
+	</select>
+            </div>
+          </div>
+          
+<div class="field-wrap">
+            <label>
+              Address<span class="req"></span>
+            </label><br>
+            <input type="text" id="address" name="address"  autocomplete="on"/>
+          </div>
+          <div class="field-wrap">
+            <label>
+              Email Address
+            </label>
+            <input type="email" id="email" name="email"  autocomplete="on"/>
+          </div>
+         
+         <br>
+             <div class="containe pull-right">  
+       
+             <button id="savelot" class="btn btn-default"><a href="memberdetails.html">Save 
+
+Member</a></button>
+              </div> 
+        </div>
+        <div id="login">   
+        </div>
+      </div><!-- tab-content -->
+</div> <!-- /form -->
+<div class="containe pull-right">
+      <button id = "opener-2" class="btn btn-default">New Member</button>
+      <button id = "opener-3"class="btn btn-default">Edit Member</button>
+      <button id = "opener-5" class="btn btn-danger"> Delete</button>
+      </div>
+</div><tr>
+
+
+  
+
+ <table id="my-ajax-table" class="table table-bordered" >
+ <thead>
+    <th   colspan="4" align="center" style="align:center">Details</th>
+   </thead>
+  <tbody>
+  <tr><td style="text-align: left;"><a href="#">Name</a></td><td style="text-align: left;">Sai Prakash</td><td style="text-align: left;">Referrer</td><td style="text-align: left;">Naveen</td></tr>
+  <tr><td style="text-align: left;"><a href="#">Address</a></td><td style="text-align: left;">H.No:30,Gold Building 10,MKJ</td><td style="text-align: left;">Phone No.</td><td style="text-align: left;">898989898</td></tr>
+  
+  </tbody>
+</table>
+   <table id="my-ajax-table" class="table table-bordered" >
+  <thead>
+    <th data-dynatable-column="name" class="dynatable-head">Name</th>
+    <th data-dynatable-column="phone" class="dynatable-head">Code</th>
+    <th data-dynatable-column="ref" class="dynatable-head">Sum Amount</th>
+    <th data-dynatable-column="address" class="dynatable-head">No. of Members</th>
+   </thead>
+  <tbody>
+  <tr><td style="text-align: left;"><a href="#">LOT1</a></td><td style="text-align: left;">Lot 32</td><td style="text-align: left;">5,00,000</td><td style="text-align: left;">40</td></tr>
+  <tr><td style="text-align: left;"><a href="#">LOT2</a></td><td style="text-align: left;">Lot 33</td><td style="text-align: left;">3,00,000</td><td style="text-align: left;">20</td></tr>
+  <tr><td style="text-align: left;"><a href="#">LOT3</a></td><td style="text-align: left;">Lot 34</td><td style="text-align: left;">1,00,000</td><td style="text-align: left;">40</td></tr></tbody>
+</table>
+
+
+</body>
+</html>
