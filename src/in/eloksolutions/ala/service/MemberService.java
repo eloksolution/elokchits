@@ -19,4 +19,8 @@ public interface MemberService {
 
 	public abstract List<Member> getMembersForPartner(int partId);
 
+	public abstract void deleteMember(int memid);
+
+	
+
 }

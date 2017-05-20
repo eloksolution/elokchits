@@ -1,34 +1,24 @@
 <!DOCTYPE html>
-
-<html>
+<html lang="en">
 <head>
- <meta charset="utf-8">
+  <title>Member Home</title>
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" 
-
-href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script 
-
-src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular.min.js"></script> 
+  
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
  <meta charset = "utf-8">
       <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"
          rel = "stylesheet">
       <script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
       <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-      <link rel="stylesheet" href="styles.css">
-      
-<style>
-table{
-font-size:25px;
-line-height: 50px;
-}
-</style>
-<link rel="stylesheet" media="all" href="<%=application.getContextPath() %>/resources/css/bootstrap-2.3.2.min.css" />
-<link rel="stylesheet" href="styles.css">
+      <script src="/elokchits/js/userscontroller.js"></script>
+    <link rel="stylesheet" href="/elokchits/css/styles.css">
 
-<title>Partners Info</title>
 </head>
+<body>
 <body data-spy="scroll" data-target=".navbar" data-offset="50">
 <nav class="navbar navbar-inverse" data-spy="affix" data-offset-top="197">
 <div class="container-fluid">
@@ -44,7 +34,7 @@ target="#myNavbar">
 
 </div>
 <div class="collapse navbar-collapse" id="myNavbar">
-        <ul class="nav navbar-nav">
+        <ul class="nav navbar-nav navbar-right">
           <li><a href="home1.html">Home</a></li>
           <li><a href="membershome.html">Members</a></li>
           <li><a href="lothome.html">Lot Details</a></li>
@@ -52,7 +42,7 @@ target="#myNavbar">
           <li><a href="auctionhome.html">Auction Home</a></li>
           <li><a href="billgeneration.html">Bill Generation</a></li>
           <li><a href="reports.html">Reports</a></li>
-           <li><a href="#" type="submit" class="s" data-toggle="modal" data-target="#myModal">Sign Up</a></li>
+          <li><a href="#" type="submit" class="s" data-toggle="modal" data-target="#myModal">Sign Up</a></li>
            <li><a type="submit" class="signin " data-toggle="modal" data-target="#signin">Sign IN</a>
            </li>
         </ul>
@@ -76,13 +66,14 @@ target="#myNavbar">
     </div>
   <div>
 
-
+<div ng-app="user" ng-controller="userCtrl" ng-init="getMember()">
 <table id="my-ajax-table" class="table table-bordered" >
-<thead><th>Sl. No</th><th>First Name</th><th>Last Name</th><th>Phone No#</th><th>Address</th><th>User Id</th></thead>
-<c:if test="${!empty users }">
-<c:forEach items="${users}"  var="u" varStatus="inner">  
-<tr><td>1</td><td>suresh</td><td>mourya</td><td>99933322&nbsp;</td><td>jkkaa&nbsp;</td><td>ramesh</td></tr>
-</c:forEach></c:if>
+<thead bgcolor="#ffe6e6"><th>Sl. No</th><th>First Name</th><th>Last Name</th><th>Phone No</th><th>Address</th><th>User Id</th></thead>
+
+<tr ng-repeat="m in members"><td style="text-align: left;">{{$index +1}}</a></td><td style="text-align: left;">{{ m.firstName}}&nbsp;{{ m.lastName}}</td><td style="text-align: left;">{{m.phone}}</td><td style="text-align: left;">{{m.phone}}</td> 
+   <td style="text-align: left;">{{m.address}}</td> <td style="text-align: left;">{{m.userName}}</td>  </tr>
+
 </table>
+</div>
 </body>
 </html>

@@ -28,5 +28,7 @@ public interface MemberDAO {
 
 	public abstract List<Member> getMembersForPartner(int partId);
 
+	public abstract void deleteMember(int memid);
+
 
 }

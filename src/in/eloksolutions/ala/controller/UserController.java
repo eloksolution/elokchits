@@ -53,13 +53,13 @@ public class UserController {
 		}
 	@ResponseBody
 	@RequestMapping(value = "/login")
-	public String getLogin(HttpServletRequest request,Model model) {
+	public List<User> getLogin(HttpServletRequest request,Model model) {
 		String user=request.getParameter("username");
 		String pass=request.getParameter("password");
 		User loggedUser=userService.getLoginUser(user, pass);
 		if(loggedUser==null){
 			model.addAttribute("msg", "UserName , Password invalid.Please enter correct details.");
-			return "msg";
+			return (List<User>) loggedUser;
 		}
 		List<User> users=userService.findAllUsers();
 		Map<String,String> userNames=new HashMap<String, String>();
@@ -71,17 +71,17 @@ public class UserController {
 		request.getSession().setAttribute("loginuser", loggedUser);
 		System.out.println("-from session="+request.getSession().getAttribute("loginuser"));
 		model.addAttribute("loginuser",loggedUser);
-		return "msg";
+		return users;
 		
 	}
 	
 	@ResponseBody
 	@RequestMapping(value = "/partners")
-	public String getPartners(HttpServletRequest request,Model model) {
+	public List<User> getPartners(HttpServletRequest request,Model model) {
 		List<User> users=userService.findAllUsers();
 		System.out.println("users "+users);
 		model.addAttribute("users",users);
-		return "partner";
+		return users;
 		
 	}
 }

@@ -2,6 +2,7 @@ package in.eloksolutions.ala.controller;
 
 import in.eloksolutions.ala.beans.MemberVO;
 import in.eloksolutions.ala.model.Lot;
+import in.eloksolutions.ala.model.Member;
 import in.eloksolutions.ala.service.LotService;
 import in.eloksolutions.ala.util.Conversions;
 import in.eloksolutions.ala.util.Utils;
@@ -44,6 +45,8 @@ public class LotController {
 		String beforeAmount=request.getParameter("beforeamount");
 		String afterAmount=request.getParameter("afteramount");
 		String lotType=request.getParameter("lottype");
+		String lotId=request.getParameter("lotId");
+		System.out.println("lot id is when edited "+lotId);
 		Date startDate=null;
 		try {
 			startDate=sdf.parse(sStartDate);
@@ -51,6 +54,11 @@ public class LotController {
 			e.printStackTrace();
 		}
 		Lot lot=new Lot();
+		if(!Utils.isNull(lotId)){
+			int ilotid=Integer.parseInt(lotId);
+				lot.setLotId(ilotid);
+				System.out.println("lot id is when edited  ilotid"+ilotid);	
+		}
 		lot.setCode(code);
 		lot.setSumAmount(Utils.setIntValue(amount));
 		lot.setNoOfMonths(Utils.setIntValue(members));
@@ -90,7 +98,7 @@ public class LotController {
 	//-------------------Retrieve single lot details--------------------------------------------------------
 	@ResponseBody
 	@RequestMapping(value = "/search/{lotid}")
-	public String getlot(@PathVariable("lotid") int lotid,Model model,HttpServletRequest req) {
+	public Lot getlot(@PathVariable("lotid") int lotid,Model model,HttpServletRequest req) {
 		System.out.println("Fetching lot details with X00001  " +lotid);
 		List<MemberVO> m=lotService.searchlotMembers(lotid);
 		if(m!=null){
@@ -105,7 +113,7 @@ public class LotController {
 		lot.setStatusName(Conversions.lotStatus.get(lot.getStatus()));
 		model.addAttribute("lot",lot);
 		model.addAttribute("mem",m);
-		return "lotView";
+		return lot;
 	}
 	
 	//-------------------Retrieve ALL lots--------------------------------------------------------
@@ -117,7 +125,7 @@ public class LotController {
 		for(Lot l:lots){
 			l.setStatusName(Conversions.lotStatus.get(l.getStatus()));
 		}
-	
+		model.addAttribute("lot",lots);
 		return lots;
 	}
 		@ResponseBody
@@ -135,7 +143,7 @@ public class LotController {
 			}
 			System.out.println(" new date is "+date);
 			lotService.updateDate(lotid,date);
-			return "lot";
+			return "success";
 			
 		}
 		
@@ -146,6 +154,38 @@ public class LotController {
 			lotService.deleteMember(memrowid);
 			return "success";
 		}
+		@ResponseBody
+		@RequestMapping(value = "/deletlot/{lotid}")
+		public String deletlot(@PathVariable("lotid") int lotid,Model model) {
+			System.out.println("LOt id is"+lotid);
+			lotService.deletelot(lotid);
+			return "success";
+		}
   
-		
+		@ResponseBody
+		@RequestMapping(value = "/lotEdit/{lotid}")
+		public Lot lotEdit(@PathVariable("lotid") int lotid,Model model,HttpServletRequest request) {
+			System.out.println("Fetching all Lot with X00001 memberEdit " + lotid);
+			Lot lots = lotService.searchById(lotid);
+			model.addAttribute("lot",lots);
+			return lots;
+		}
+		@ResponseBody
+		@RequestMapping(value = "/statusUpdated/{lotid}")
+		public String statusUpdate(@PathVariable("lotid") int lotid,Model model,HttpServletRequest req) {
+			System.out.println("Fetching lot details with X00001  " +lotid);
+			
+			String  status=req.getParameter("status");
+			
+			System.out.println("start status is new "+status);
+			if(!Utils.isNull(status)){
+				int inStatus=Integer.parseInt(status);
+				
+				lotService.statusUpdate(lotid,inStatus);
+			}
+			
+			
+			return "success";
+			
+		}
 }

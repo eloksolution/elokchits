@@ -1,25 +1,24 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Bill Generation</title>
+  <title>Member Home</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular.min.js"></script> 
+  
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="styles.css">
-  <style>
-  /* Note: Try to remove the following lines to see the effect of CSS positioning */
-  .affix {
-      top: 0;
-      width: 100%;
-  }
+ <meta charset = "utf-8">
+      <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"
+         rel = "stylesheet">
+      <script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
+      <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+      <script src="/elokchits/js/userscontroller.js"></script>
+    <link rel="stylesheet" href="/elokchits/css/styles.css">
 
-  .affix + .container-fluid {
-      padding-top: 70px;
-  }
-  </style>
 </head>
+<body>
 <body data-spy="scroll" data-target=".navbar" data-offset="50">
 <nav class="navbar navbar-inverse" data-spy="affix" data-offset-top="197">
 <div class="container-fluid">
@@ -35,7 +34,7 @@ target="#myNavbar">
 
 </div>
 <div class="collapse navbar-collapse" id="myNavbar">
-        <ul class="nav navbar-nav">
+        <ul class="nav navbar-nav navbar-right">
           <li><a href="home1.html">Home</a></li>
           <li><a href="membershome.html">Members</a></li>
           <li><a href="lothome.html">Lot Details</a></li>
@@ -43,13 +42,15 @@ target="#myNavbar">
           <li><a href="auctionhome.html">Auction Home</a></li>
           <li><a href="billgeneration.html">Bill Generation</a></li>
           <li><a href="reports.html">Reports</a></li>
-           <li><a href="#" type="submit" class="s" data-toggle="modal" data-target="#myModal">Sign Up</a></li>
+          <li><a href="#" type="submit" class="s" data-toggle="modal" data-target="#myModal">Sign Up</a></li>
            <li><a type="submit" class="signin " data-toggle="modal" data-target="#signin">Sign IN</a>
            </li>
         </ul>
       </div>
 </div>
 </nav>
+<div ng-app="user" ng-controller="userCtrl" ng-init="getMember()">
+
   <h1  align="center">Bill Generation</h1>
 
 <div class="container-fluid" style="background-color:#e6f0ff;height:100px;">
@@ -70,9 +71,7 @@ target="#myNavbar">
 <thead>
 <tr><td><font size="5">Select Partner</font></td><td> <select style='font-size:20px; height:50px' name="ref" id="reference" >
 	<option value="0">Select Referrer</option>
-              <c:if test="${!empty users }">
-<c:forEach items="${users}"  var="u"  >  
-	<option value="${u.userId}">${u.firstName},${u.lastName}</option>
+	<option ng-repeat="m in members">{{m.firstName}},{{m.lastName}},{{m.userId}}</option>
 	</c:forEach></c:if>
 	</select></td></tr>
 </table>     
@@ -80,10 +79,9 @@ target="#myNavbar">
 </div><br><br><br>
 <div>
 </table>
-<table><tr><td><input id='genidmain' type="button" value='Generate Bills'></td><td>&nbsp;</td><td><input id='genid' type="button" value='Generate Bills on Paper'></td><td>&nbsp;</td><td><input id='partid' type="button" value='Partner Report'></td></tr></table>
-
+<center><tr><td><input id='genidmain' type="button" class="btn btn-primary btn-lg" value='Generate Bills'></td><td>&nbsp;</td><td><input id='genid' type="button" class="btn btn-primary btn-lg" value='Generate Bills on Paper'></td><td>&nbsp;</td><td><input id='partid' type="button" class="btn btn-primary btn-lg" value='Partner Report'></td></tr></center>
 
 </div>
-
+</div>
 </body>
 </html>

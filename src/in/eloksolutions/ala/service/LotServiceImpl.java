@@ -56,5 +56,14 @@ public class LotServiceImpl implements LotService{
 	public void deleteMember(int memrowid) {
 		lotDAO.deleteMember(memrowid);
 	}
-
+	@Override
+	public void deletelot(int lotid) {
+		lotDAO.deletelot(lotid);
+	}
+	@Override
+	public void statusUpdate(int lotId, int status) {
+		lotDAO.statusUpdate(status,lotId);
+		
+	}
+	
 }

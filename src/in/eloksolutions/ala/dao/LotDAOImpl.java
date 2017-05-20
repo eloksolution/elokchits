@@ -3,6 +3,7 @@ package in.eloksolutions.ala.dao;
 import in.eloksolutions.ala.beans.MemberVO;
 import in.eloksolutions.ala.dao.jdbc.MemberRowMapper;
 import in.eloksolutions.ala.model.Lot;
+import in.eloksolutions.ala.model.Member;
 
 import java.util.Date;
 import java.util.List;
@@ -58,7 +59,7 @@ public class LotDAOImpl extends HibernateDaoSupport implements LotDAO{
 	}
 
 	public void add(Lot lot) {
-		sessionFactory.getCurrentSession().save(lot);
+		sessionFactory.getCurrentSession().saveOrUpdate(lot);
 		sessionFactory.getCurrentSession().flush();
 		System.out.println("after flush "+lot);
 	}
@@ -119,6 +120,20 @@ public class LotDAOImpl extends HibernateDaoSupport implements LotDAO{
 		//LotMember ent =(LotMember) getSessionFactory().getCurrentSession().load(LotMember.class, memrowid);
 		//getSessionFactory().getCurrentSession().delete(ent);
 	}
-	
+
+	@Override
+	public void deletelot(int lotid) {
+		Lot ent =(Lot) getSessionFactory().getCurrentSession().load(Lot.class, lotid);
+		ent.setStatus((int) 0);
+		getSessionFactory().getCurrentSession().saveOrUpdate(ent);
+		
+	}
+	@Override
+	public void statusUpdate(int status, int lotId) {
+		
+		Lot lot =  (Lot) getSessionFactory().getCurrentSession().load(Lot.class, new Integer(lotId));
+		lot.setStatus(status);
+		System.out.println("After update startDate "+status);
+	}
 
 }

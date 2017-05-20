@@ -48,4 +48,10 @@ public MemberDAO getMembersDAO() {
 		return memberDAO.getMembersForPartner(partId);
 	}
 
+	@Override
+	public void deleteMember(int memid) {
+		 memberDAO.deleteMember(memid);
+		
+	}
+
 }

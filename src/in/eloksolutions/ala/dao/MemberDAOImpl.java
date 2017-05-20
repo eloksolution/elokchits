@@ -87,7 +87,7 @@ public class MemberDAOImpl extends HibernateDaoSupport implements MemberDAO {
 	}
 	
 	public List<Member> findAllMembers() {
-		String sql="FROM Member ORDER BY update_date DESC";
+		String sql="FROM Member where status=1 ORDER BY update_date DESC";
 		Query query=getSessionFactory().getCurrentSession().createQuery(sql);
 		return query.list();
 	}
@@ -127,6 +127,13 @@ public class MemberDAOImpl extends HibernateDaoSupport implements MemberDAO {
 		Criterion completeCondition = Restrictions.disjunction().add(partnerId);
 		cr.add(completeCondition);
 		return cr.list();
+	}
+
+	@Override
+	public void deleteMember(int memid) {
+		Member ent =(Member) getSessionFactory().getCurrentSession().load(Member.class, memid);
+		ent.setStatus((byte) 0);
+		getSessionFactory().getCurrentSession().saveOrUpdate(ent);
 	}
 
 }

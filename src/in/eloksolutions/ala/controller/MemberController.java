@@ -38,7 +38,7 @@ public class MemberController {
 				String  fname=request.getParameter("firstname");
 				String  lname=request.getParameter("lastname");
 				String  phone=request.getParameter("phone");
-				String  reference=request.getParameter("reference");
+				String  reference=request.getParameter("refId");
 				String  address=request.getParameter("address");
 				String  email=request.getParameter("email");
 				System.out.println("Req email"+email);
@@ -96,7 +96,7 @@ public class MemberController {
 				return member;
 			}
 	//-------------------Retrieve Members By Name--------------------------------------------------------
-			@ResponseBody
+	        @ResponseBody
 			@RequestMapping(value = "/searchname", method = RequestMethod.GET)
 			public List<Map<String, String>> getMembers(HttpServletRequest request,Model model) {
 				String  term=request.getParameter("term");
@@ -109,10 +109,10 @@ public class MemberController {
 				for(Member m:member){
 					LinkedHashMap<String,String> map=new LinkedHashMap<>();
 					String nam="";
-					if(m.getLastName()!=null)nam=m.getFirstName()+" "+m.getLastName()+"-"+users.get(m.getRefId()+"");
+				/*	if(m.getLastName()!=null)nam=m.getFirstName()+" "+m.getLastName()+"-"+users.get(m.getRefId()+"");
 					else
 						nam=m.getFirstName()+"-"+users.get(m.getRefId()+"");
-					System.out.println("ref name is  "+nam);
+					System.out.println("ref name is  "+nam);*/
 					map.put("value",nam);
 					map.put("memId",m.getMemId()+"");
 					map.put("refId",m.getRefId()+"");
@@ -143,5 +143,11 @@ public class MemberController {
 				model.addAttribute("mem",members);
 				return members;
 			}
-					
-}
+            @ResponseBody
+    		@RequestMapping(value = "/deletemember/{memid}")
+    		public String deleteMember(@PathVariable("memid") int memid,Model model) {
+    			System.out.println("member id is"+memid);
+    			membersService.deleteMember(memid);
+    			return "success";
+    		}
+            }

@@ -31,4 +31,8 @@ public interface LotDAO {
 	public void updateDate(Date startDate,int lotId);
 
 	public abstract void deleteMember(int memrowid);
+
+	public abstract void deletelot(int lotid);
+	
+	void statusUpdate(int status, int lotId);
 }

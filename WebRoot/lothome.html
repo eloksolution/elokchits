@@ -1,23 +1,26 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Lot Details</title>
+
+  <title>Lot Home</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular.min.js"></script> 
-  <script src="/elokchits/js/lotcontroller.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular.min.js"></script> 
+  
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
  <meta charset = "utf-8">
       <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"
          rel = "stylesheet">
       <script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
       <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-      </script>
+      <script src="/elokchits/js/lotcontroller.js"></script>
+      <script src="/elokchits/js/jquery-1.12.4.js"></script>
+       <script src="/elokchits/js/jquery-ui.js"></script>
+    <link rel="stylesheet" href="/elokchits/css/styles.css">
+    
+  
      <script lanaguage="javascript">
     function Sbox()
     {
@@ -37,10 +40,11 @@
     }
     }
 </script>  
-<link rel="stylesheet" href="/elokchits/css/styles.css">
-      
+
+ 
 </head>
-<body data-spy="scroll" data-target=".navbar" data-offset="50">
+<body ng-app="lot" ng-controller="lotCtrl">
+
 <nav class="navbar navbar-inverse" data-spy="affix" data-offset-top="197">
 <div class="container-fluid">
 <div class="navbar-header">
@@ -54,17 +58,16 @@ target="#myNavbar">
       <a class="navbar-brand" href="home1.html">elok</a>
 
 </div>
-<div class="collapse navbar-collapse navbar-right" id="myNavbar">
+<div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="home1.html">Home</a></li>
+          <li><a href="home1.html" class="active">Home</a></li>
           <li><a href="membershome.html">Members</a></li>
           <li><a href="lothome.html">Lot Details</a></li>
           <li><a href="partner.html">Partners</a></li>
           <li><a href="auctionhome.html">Auction Home</a></li>
           <li><a href="billgeneration.html">Bill Generation</a></li>
           <li><a href="reports.html">Reports</a></li>
-           <li><a href="reports.html">Reports</a></li>
-           <li><a href="#" type="submit" class="s" data-toggle="modal" data-target="#myModal">Sign Up</a></li>
+          <li><a href="#" type="submit" class="s" data-toggle="modal" data-target="#mylotadd">Sign Up</a></li>
            <li><a type="submit" class="signin " data-toggle="modal" data-target="#signin">Sign IN</a>
            </li>
         </ul>
@@ -72,29 +75,29 @@ target="#myNavbar">
 </div>
 </nav>
 <h1  align="center">Lot Home</h1>
-<div class="container-fluid" style="background-color:#e6f0ff;height:100px;">
-<br> <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-      Recently Viewed <span class="caret"></span></button>
-      <ul class="dropdown-menu" role="menu">
-        <li><a href="#">New lot</a></li>
-        <li><a href="#">New Members</a></li>
-      </ul>
-    
-  <div class="lotadd" ng-app="lot" ng-controller="lotCtrl">
-     
-  <div class="containe pull-right">
+   <div class="container-fluid" style="background-color:#e6f0ff;height:100px;">
+   <form class="form-inline">
+            <div class="form-group">
+                <label>Enter LotId No:</label>
+                <input type="text" class="form-control" autocomplete="on" class="form-control input-sm" ng-model="lotId">
+            </div>
+            <button class="btn btn-primary" ng-click="editLot(lotId)" data-toggle="modal" data-target="#searchLot">Search</button>
+       &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <label>Total No.of Lots:</label>
+        </form>
+   <div class="containe pull-right">
   <!-- Trigger the modal with a button -->
   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#mylotadd"> New Lot</button>
 </div>
-  <!-- Modal -->
-  <div class="modal fade" id="mylotadd" role="dialog">
+   </div>   
+    
+     <div class="modal fade" id="mylotadd" role="dialog">
     <div class="modal-dialog">
     <form ng-submit="saveLot()" method="POST">
       <!-- Modal content-->
       <div class="modal-content">
-        <div class="modal-header">
+        <div class="modal-header" bgcolor="#ffe6e6">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title" align="center">Create New Lot</h4>
+          <h4 class="modal-title" align="center" >Create New Lot</h4>
         </div>
 <div class="modal-body">
  <form role="form">
@@ -139,7 +142,8 @@ target="#myNavbar">
 </div>
 <div class="col-xs-6 col-sm-6 col-md-6">
 <div class="form-group">
-	<input type="text" id="startdate" ng-model="startdate" tabindex="7" required autocomplete="on"  class="form-control input-sm" placeholder="startdate(13-03-2015)">
+	<input class="datepicker" type="text" id="startdate" ng-model="startdate" tabindex="7" required autocomplete="on"  class="form-control input-sm" placeholder="startdate(13-03-2015)">
+	 <input type="hidden" id="lotId" ng-model="lotId" >
 	 </div>
 	</div>
 	</div>
@@ -162,6 +166,7 @@ target="#myNavbar">
     <div class="col-xs-6 col-sm-6 col-md-6">
 <div class="form-group">
 	<input type="text" id="afteramount" ng-model="afteramount" tabindex="7" required autocomplete="on"   class="form-control input-sm" placeholder="afteramount ">
+		 
 	 </div>
 	</div>
 	</div>
@@ -173,23 +178,19 @@ target="#myNavbar">
          <button ng-click="saveLot" type="submit" class="btn btn-primary">SaveLot</button>
           <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
         </div>
-        </form>
+        </form><br>
       </div>
-      
+      </div>
     </div>
-  </div>
+    
+  <div ng-init="getLot()">
   
-</div>
-      
-      </div>
- 
-</div>
-
-
-<div ng-app="lot" ng-controller="lotCtrl" ng-init="saveLot()">
-<table id="my-ajax-table" class="table table-bordered" >
-  <thead>
-    <th type="button" data-dynatable-column="name" class="dynatable-head">Lot Code</th>
+<table id="myTable" class="table table-bordered">
+  <thead bgcolor="#ffe6e6">
+          
+         <th type="button" data-dynatable-column="name" class="dynatable-head">S.No</th>
+     
+     <th type="button" data-dynatable-column="name" class="dynatable-head">Lot Code</th>
     <th type="button" data-dynatable-column="phone" class="dynatable-head">Sum Amount</th>
     <th type="button" data-dynatable-column="ref" class="dynatable-head">No. of Members</th>
     <th type="button" data-dynatable-column="address" class="dynatable-head">Company Commission</th>
@@ -200,12 +201,109 @@ target="#myNavbar">
     <th type="button" data-dynatable-column="address" class="dynatable-head">Delete</th>
    </thead>
   <tbody>  
-   <tr ng-repeat="l in lots"><td style="text-align: left;"><a href="memberView.html">{{l.lotId}}</a></td><td style="text-align: left;">{{l.sumAmount}}</td><td style="text-align: left;">{{l.noOfMonths}}</td><td style="text-align: left;">{{m.commisionper}}</td> </td><td style="text-align: left;">{{l.status}}</td></td><td style="text-align: left;">{{l.beforeLiftAmount}}</td></td><td style="text-align: left;">{{l.afterLiftAmount}}</td><td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button></p></td>
-    <td><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></p></td>
+   <tr ng-repeat="l in lots track by $index"><td style="text-align: left;">{{$index +1}}</td><td style="text-align: left;"><a  href="lotdetails.html?lotid={{l.code}}">{{l.code}}</a></td><td style="text-align: left;">{{l.sumAmount}}</td><td style="text-align: left;">{{l.noOfMonths}}</td><td style="text-align: left;">{{l.commisionper}}</td> </td><td style="text-align: left;">{{l.status}}</td></td><td style="text-align: left;">{{l.beforeLiftAmount}}</td></td><td style="text-align: left;">{{l.afterLiftAmount}}</td>
+    <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" ng-click="editLot(l.lotId)" data-target="#mylotadd" data-toggle="modal"  ><span class="glyphicon glyphicon-pencil"></span></button></p></td>
+    <td><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" ng-click="deleteLot(l.lotId)" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></p></td>
+  
     </tr>
   
   </table>
+  </div>
+   <div class="container">
+  
+  <!-- Trigger the modal with a button -->
+ 
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="searchLot" role="dialog">
+    <div class="modal-dialog  modal-lg" >
+    
+      <!-- Modal content-->
+      <div class="modal-content" background-color= "#00ff00">
+        <div class="modal-header" >
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title" align="center">Lot Details</h4>
+        </div>
+        <div class="modal-body">
+          <table id="my-ajax-table" class="table table-bordered" width="80%" align="center" style="width:70%;">
+  <tbody>
+   <c:if test="${!empty lot }">
+   <input type="hidden" id="lotId" name="lotId" ng-model="lotId"/>
+  <tr><td style="text-align: left;">Lot Code</td><td style="text-align: left;">{{lotcode}}</td></tr>
+  <tr><td style="text-align: left;">Sum Amount</td><td style="text-align: left;">{{sumamount}}</td>
+  <td style="text-align: left;">No. of Months</td><td style="text-align: left;">{{members}}</td></tr>
+   <tr><td style="text-align: left;">Commission</td><td style="text-align: left;">{{commission}}</td>
+  <td style="text-align: left;">Status</td><td style="text-align: left;"> 
+   <select ng-model="status" id="members" tabindex="4" class="form-control input-sm">
+  <option value="2">active</option>
+  <option value="0">complete</option>
+  <option value="1">Inactive</option>
+ 
+</select> 
+<p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" ng-click="statusUpdate(lotId)"  data-toggle="modal"  ><span class="glyphicon glyphicon-pencil"></span></button></p></td></tr>
+  <tr><td style="text-align: left;">Description</td><td style="text-align: left;">{{description}}</td>
+  <td style="text-align: left;">Start Date</td><td style="text-align: left;">
+            <input type="text" id="lotId" name="lotId" ng-model="startdate"/>
+             <input type="hidden" id="lotId" name="lotId" ng-model="lotId"/>
+            <button type= "date"class="btn btn-primary btn-xs" data-title="Edit" ng-click="dateUpdate()"  data-toggle="modal"  ><span class="glyphicon glyphicon-pencil"></span></button></p> </td>
+            
+  </tr>
+  </c:if>
+  </tbody>
+</table>   
+        
+        <div>
+         <form ng-submit="saveLotMember()" method="POST">
+        <table width="80%" align="center" style="width:80%;"><tr><td>Member <input type="text" autocomplete="off" ng-model="memName" id="memid"ng-click="memSearch()" class="ui-autocomplete-input">
+      
+  <!-- Modal -->
+   <input type="hidden"  " class="form-control input-sm" ng-model="memId" placeholder="memId">
+  <input type="hidden"class="form-control input-sm" ng-model="memName" placeholder="Last Name">
+	   <input type="hidden"   class="form-control input-sm" ng-model="refId" placeholder="First Name">
+			    	
+<input type="button"  value="Add Member" id="addbtn" ng-click="saveLotMember()"></td></tr></table>
+</form>
+<table id="my-table" class="table table-bordered" width="80%" align="center" style="width:80%;">
+  <thead id="mem_list">
+    <th data-dynatable-column="name" class="dynatable-head">Member Name</th>
+    <th data-dynatable-column="phone" class="dynatable-head">Phone</th>
+    <th data-dynatable-column="ref" class="dynatable-head">Referrer</th>
+    <th data-dynatable-column="address" class="dynatable-head">Address</th>
+     <th data-dynatable-column="address" class="dynatable-head">Auction Amount</th>
+      <th data-dynatable-column="address" class="dynatable-head">Paid Date</th>
+      
+   </thead>
+   
+  <td style="text-align: left;"><a href="{{m.memberId}}">{{m.firstName}},{{m.lastName}}</a></td>
+      <td style="text-align: left;">{{m.phone}}</td>
+      <td style="text-align: left;">{{m.referName}}</td>
+      <td style="text-align: left;">{{m.address}}</td>
+       <td style="text-align: left;">{{m.auctionAmt}}</td>
+        <td style="text-align: left;">{{m.paidDate}} </td> 
+         <td style="text-align: left;"><img  onclick="deletemember('{{m.lotMemberId}}',$(this))"  src="/ALA/resources/images/delete.png" width="20px" height="20px"></td>
+            
+                 </td> 
+        
+        
+  </tr>
+  </tbody>
+   
+</table>
 </div>
 
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+ 
+</div>
+  
 </body>
-</html>
+</html>  
+   
+    

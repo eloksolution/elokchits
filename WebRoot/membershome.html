@@ -4,25 +4,22 @@
   <title>Member Home</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" 
-
-href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular.min.js"></script> 
+   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular.min.js"></script> 
   
-  <script 
-
-src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
  <meta charset = "utf-8">
       <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"
          rel = "stylesheet">
       <script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
       <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
       <script src="/elokchits/js/membercontroller.js"></script>
+      
     <link rel="stylesheet" href="/elokchits/css/styles.css">
-
 </head>
 <body>
+
 <body data-spy="scroll" data-target=".navbar" data-offset="50">
 <nav class="navbar navbar-inverse" data-spy="affix" data-offset-top="197">
 <div class="container-fluid">
@@ -53,23 +50,28 @@ target="#myNavbar">
       </div>
 </div>
 </nav>
-<div class="container-fluid" style="background-color:#e6f0ff;height:100px;">
-  
- <div class="btn-group">
- 
-     <br> <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-      Recently Viewed <span class="caret"></span></button>
-      <ul class="dropdown-menu" role="menu">
-        <li><a href="#">New lot</a></li>
-        <li><a href="#">New Members</a></li>
-      </ul>
-    </div>
     <div ng-app="member" ng-controller="memberCtrl" id ="memberadd">
+
+<h1  align="center">Member Home</h1>
+<div class="container-fluid" style="background-color:#e6f0ff;height:100px;">
+  <form class="form-inline">
+            <div class="form-group">
+                <label>Enter Memberid No:</label>
+                <input type="text" class="form-control" autocomplete="on" class="form-control input-sm" ng-model="memId">
+            </div>
+            <button class="btn btn-primary" ng-click="editMember(memId)" data-toggle="modal" data-target="#searchMem">Search</button>
+       &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <strong >Total no.o Members :<strong>
+        </form>
+ 
+ 
+   </div>
+   
     <div class="signup">
   <div class="containe pull-right">
   <!-- Trigger the modal with a button -->
   <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">New Member</button>
 </div>
+
 <form ng-submit="saveMember()" method="POST">
   <!-- Modal -->
   <div class="modal fade" id="myModal" role="dialog">
@@ -101,17 +103,18 @@ target="#myNavbar">
 	 <input type="phone" name="phonenumber" id="phonenumber" class="form-control input-sm" ng-model="phone" placeholder="phonenumber">
     </div>
     </div>
-    
+    <div ng-init="getUser()">
 <div class="col-xs-6 col-sm-6 col-md-6">
 <div class="form-group">
- <select ng-model="reference" id="reference" class="form-control input-sm">
+
+ <select ng-model="refId" id="reference" class="form-control input-sm">
     <option value="0">Select correct Referrer</option>
-              <c:if test="suresh">
-<c:forEach items="users"  var="u"  >  
+               
 	
-	<option value="userid">suresh</option>
+<option ng-repeat="u in users" value="{{$index +1}}">{{u.firstName}}&nbsp;{{u.lastName}}</option>
 	</c:forEach></c:if>
 	</select> 
+	 </div>
     </div>
     </div>
      </div>
@@ -144,12 +147,64 @@ target="#myNavbar">
     </div>
   </div>
   </div>
+<div class="container">
+  
+  <!-- Trigger the modal with a button -->
+ 
 
+  <!-- Modal -->
+  <div class="modal fade" id="searchMem" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content" background-color= "#00ff00">
+        <div class="modal-header" >
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title" align="center">Member Details</h4>
+        </div>
+        
+        <div class="modal-body">
+        
+          <div class="row">
+            <div class="col-sm-2"><label>Meber Id :</label></div>
+            <div class="col-sm-2">{{memId}}</div>
+        </div>
+        <div class="row">
+            <div class="col-sm-2"><label> MeberName:</label></div>
+            <div class="col-sm-2">{{firstname}}{{lastname}}</div>
+        </div>
+        <div class="row">
+            <div class="col-sm-2"><label>phone :</label></div>
+            <div class="col-sm-2">
+               {{phone}}
+              </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-2"><label>Email :</label></div>
+            <div class="col-sm-2">{{email}}</div>
+        </div>             
+        <div class="row">
+            <div class="col-sm-2"><label>Address :</label></div>
+            <div class="col-sm-2">{{address}}</div>
+        </div>             
+          
+        </div>
+        
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
 
     
 <div ng-init="getMember()">
 <table id="my-ajax-table" class="table table-bordered" >
-  <thead>
+  <thead bgcolor="#ffe6e6">
+    <th type="button" data-dynatable-column="name" class="dynatable-head">Sl.No</th>
     <th type="button" data-dynatable-column="name" class="dynatable-head">Name</th>
     <th type="button" data-dynatable-column="phone" class="dynatable-head">Address</th>
     <th type="button" data-dynatable-column="ref" class="dynatable-head">Referrer</th>
@@ -158,26 +213,12 @@ target="#myNavbar">
     <th type="button" data-dynatable-column="address" class="dynatable-head">Delete</th>
    </thead>
   <tbody>  
-   <tr ng-repeat="m in members"><td style="text-align: left;"><a href="memberView.html">{{ m.firstName}},{{ m.lastName}}</a></td><td style="text-align: left;">{{m.address}}</td><td style="text-align: left;">{{m.referName}}</td><td style="text-align: left;">{{m.phone}}</td> <td><p data-placement="top" data-toggle="tooltip"  title="Edit"><button class="btn btn-primary btn-xs" ng-click="editMember(m.memId)" data-target="#myModal" data-title="Edit" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button></p></td>
-    <td><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></p></td>
+   <tr ng-repeat="m in members track by $index"><td style="text-align: left;">{{$index +1}}</td><td style="text-align: left;"><a  ng-click="memberview(m.memId)" data-toggle="modal" data-target="#searchMem">{{ m.firstName}},{{ m.lastName}}</a></td><td style="text-align: left;">{{m.address}}</td><td style="text-align: left;">{{m.referName}}</td><td style="text-align: left;">{{m.phone}}</td> <td><p data-placement="top" data-toggle="tooltip"  title="Edit"><button class="btn btn-primary btn-xs" ng-click="editMember(m.memId)" data-target="#myModal" data-title="Edit" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button></p></td>
+    <td><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" ng-click="deleteMember(m.memId)" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></p></td>
+  
     </tr>
   
   </table>
-  <ul>
- <li>
-  <button type="button" ng-disabled="curPage == 0"
- ng-click="curPage=curPage-1">PREV</button>
- </li>
- <li>
- <span>Page {{curPage + 1}} of {{ numberOfPages() }}</span>
- </li>
- <li>
- <button type="button"
- ng-disabled="curPage >= datalists.length/pageSize - 1"
- ng-click="curPage = curPage+1">NEXT </button>
- </li>
-</ul>
 </div>
-
 </body>
 </html>

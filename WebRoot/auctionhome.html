@@ -1,15 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
- <meta charset="utf-8">
- <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Member Home</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular.min.js"></script> 
+  
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="/elokchits/css/styles.css">
-   
+ <meta charset = "utf-8">
+      <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"
+         rel = "stylesheet">
+      <script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
+      <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+      <script src="/elokchits/js/auction.js"></script> 
+    <link rel="stylesheet" href="/elokchits/css/styles.css">
 </head>
-<body data-spy="scroll" data-target=".navbar" data-offset="50">
+
+<body data-spy="scroll" data-target=".navbar" data-offset="50" ng-app="auction" >
+<div ng-controller="auctionCtrl">
 <nav class="navbar navbar-inverse" data-spy="affix" data-offset-top="197">
 <div class="container-fluid">
 <div class="navbar-header">
@@ -31,7 +41,6 @@ target="#myNavbar">
           <li><a href="partner.html">Partners</a></li>
           <li><a href="auctionhome.html">Auction Home</a></li>
           <li><a href="billgeneration.html">Bill Generation</a></li>
-          <li><a href="reports.html">Reports</a></li>
            <li><a href="reports.html">Reports</a></li>
            <li><a href="#" type="submit" class="s" data-toggle="modal" data-target="#myModal">Sign Up</a></li>
            <li><a type="submit" class="signin " data-toggle="modal" data-target="#signin">Sign IN</a>
@@ -55,42 +64,47 @@ target="#myNavbar">
     <br>
     </div>
   <div>
-
+<div ng-init="getAuction()">
    <table id="my-ajax-table" class="table table-bordered" >
-  <thead>
+  <thead bgcolor="#ffe6e6">
     <th data-dynatable-column="name" class="dynatable-head">Lot</th>
-    <th data-dynatable-column="phone" class="dynatable-head">Code</th>
     <th data-dynatable-column="ref" class="dynatable-head">Sum Amount</th>
     <th data-dynatable-column="address" class="dynatable-head">Company Commissioin</th>
     <th data-dynatable-column="address" class="dynatable-head">Auction Amount</th>
-    <th data-dynatable-column="address" class="dynatable-head">Member Commissioin</th>
+     <th data-dynatable-column="address" class="dynatable-head">Member Premium</th>
+  
+  <th data-dynatable-column="address" class="dynatable-head">Member Commissioin</th>
     <th data-dynatable-column="address" class="dynatable-head">Amount to be Paid</th>
     <th data-dynatable-column="address" class="dynatable-head">No. of Months</th>
     <th data-dynatable-column="address" class="dynatable-head">Lift Members</th> 
-    <th data-dynatable-column="address" class="dynatable-head">Updated 
-Date</th> 
-
-<th data-dynatable-column="address" class="dynatable-head">Payment Details</th>
+    <th data-dynatable-column="address" class="dynatable-head">Updated Date</th> 
+    <th data-dynatable-column="address" class="dynatable-head">Payment Details</th>
 
    </thead>
   <tbody>
-  <tr><td style="text-align: left;"><a href="#">LOT1</a></td><td style="text-align: left;">Lot 32</td>
-  <td style="text-align: left;">5,00,000</td>
-  
-  <td style="text-align: left;">20000</td>
-  <td style="text-align: left;"><input style="height: 40px" type="text"   ></td>
-  <td style="text-align: left;">20000</td>
-  <td style="text-align: left;">8000</td>
-  <td style="text-align: left;">40</td><td style="text-align: left;">3,00,000</td><td style="text-align: left;">3,00,000</td><td style="text-align: left;">3,00,000</td></tr>
-  <tr><td style="text-align: left;"><a href="#">LOT2</a></td><td style="text-align: left;">Lot 33</td>
-  <td style="text-align: left;">3,00,000</td><td style="text-align: left;">15000</td><td style="text-align: left;"><input type="text" style="height: 40px"  ></td><td style="text-align: left;">3,00,000</td><td style="text-align: left;">3,00,000</td><td style="text-align: left;">3,00,000</td>
-  <td style="text-align: left;">3000</td><td style="text-align: left;">6000</td><td style="text-align: left;">20</td></tr>
-  <tr><td style="text-align: left;"><a href="#">LOT3</a></td><td style="text-align: left;">Lot 34</td>
-
-  <td style="text-align: left;">1,00,000</td><td style="text-align: left;">5000</td><td style="text-align: left;"><input type="text"  style="height: 40px" ></td>
-  <td style="text-align: left;">1500</td><td style="text-align: left;">4000</td><td style="text-align: left;">4000</td><td style="text-align: left;">4000</td><td style="text-align: left;">4000</td><td style="text-align: left;">40</td></tr>
-  </tbody>
+  <tr ng-repeat="m in auctions">
+  <td style="text-align: left;"><a href="lotdetails.html" ng-click="editLot(m.lot.lotId)">{{m.lot.code}}</a></td>
+  <td style="text-align: left;">{{m.lot.sumAmount}}</td>
+  <td style="text-align: left;">{{m.lot.commisionper}}</td>
+  <td style="text-align: left;"><input type="text" ng-model="actionamount" /></td>
+  <td style="text-align: left;"ng-model="meberpremium" />1000</td>
+  <td style="text-align: left;">{{m.lot.commisionper}}</td>
+ 
+<td style="text-align: left;">{{m.auctionamountpaid}}</td></td>
+<td style="text-align: left;">{{m.lot.noOfMonths}}</td>
+ <td style="text-align: left;"><input type="text" ng-model="actionamount" /></td>
+<td style="text-align: left;">{{m.afterLiftAmount}}</td>
+   <td style="text-align: left;"></td>
+    </tr>
+      
 </table>
+
 </div>
+</div>
+<center>
+         <button style="text-align:center" type="button" class="btn btn-primary btn-lg" data-dismiss="modal">Clear</button>
+         <button style="text-align:center" type="button" ng-submit="saveAuction()" class="btn btn-primary btn-lg" data-dismiss="modal">Submit</button>
+       </center>
+         
 </body>
 </html>

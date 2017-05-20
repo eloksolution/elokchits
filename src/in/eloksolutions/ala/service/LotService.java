@@ -21,4 +21,10 @@ public interface LotService {
 	public void updateDate(int lotId, Date startdate);
 
 	public abstract void deleteMember(int memrowid);
+
+	public abstract void deletelot(int lotid);
+
+	public abstract void statusUpdate(int lotid, int Status);
+
+	
 }
