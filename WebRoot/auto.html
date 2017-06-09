@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+
+ <meta charset = "utf-8">
+      <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel = "stylesheet">
+      <script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
+      <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+       <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular.min.js"></script> 
+       <script src="/elokchits/js/auction.js"></script> 
+ <script type="text/javascript">
+   $(function(){
+   $( ".memname" ).autocomplete({
+		
+	    source: "/elokchits/auction/searchMember?lotid=11",
+	      minLength: 2,
+	     
+	      select: function( event, ui ) {
+	         var id=ui.item.id 
+			     
+	         
+	      }
+	      
+	    });
+   });
+</script> 
+</head>
+<body ng-app="auction">
+<div ng-controller="auctionCtrl">
+<div ng-init="getAuction()">
+   <table id="my-ajax-table" class="table table-bordered" >
+  <thead bgcolor="#ffe6e6">
+    <th data-dynatable-column="name" class="dynatable-head">Lot</th>
+    <th data-dynatable-column="ref" class="dynatable-head">Sum Amount</th>
+    <th data-dynatable-column="address" class="dynatable-head">Company commission</th>
+    <th data-dynatable-column="address" class="dynatable-head">Auction Amount</th>
+     <th data-dynatable-column="address" class="dynatable-head">Member Premium</th>
+  
+  <th data-dynatable-column="address" class="dynatable-head">Member commission</th>
+    <th data-dynatable-column="address" class="dynatable-head">Amount to be Paid</th>
+    <th data-dynatable-column="address" class="dynatable-head">No. of Months</th>
+    <th data-dynatable-column="address" class="dynatable-head">Lift Members</th> 
+    <th data-dynatable-column="address" class="dynatable-head">Updated Date</th> 
+    <th data-dynatable-column="address" class="dynatable-head">Payment Details</th>
+
+   </thead>
+  <tbody>
+  <tr ng-repeat="m in auctions">
+  <td style="text-align: left;"><a  href="lotdetails.html?lotid={{m.lot.lotId}}">{{m.lot.code}}</a></td>
+  <td style="text-align: left;">{{m.lot.sumAmount}}</td>
+  <td style="text-align: left;">{{m.lot.commisionper}}</td>
+  <td style="text-align: left;"><input type="text" ng-model="actionamount" /></td>
+  <td style="text-align: left;"ng-model="meberpremium" />1000</td>
+  <td style="text-align: left;">{{m.lot.commisionper}}</td>
+ 
+<td style="text-align: left;">{{m.auctionamountpaid}}</td></td>
+<td style="text-align: left;">{{m.lot.noOfMonths}}</td>
+ <td style="text-align: left;"><input type="text"  ng-model="{{$index +1}}" name='memname'  class='memname'/></td>
+<td style="text-align: left;">{{m.afterLiftAmount}}</td>
+   <td style="text-align: left;"></td>
+    </tr>
+      
+</table>
+<input ng-model="test" type="text"  name='memname'  class='memname'/></td>
+</div>
+</div>
+
+</div>
+</body>
+</html>
+  

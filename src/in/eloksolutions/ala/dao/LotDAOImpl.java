@@ -4,7 +4,7 @@ import in.eloksolutions.ala.beans.MemberVO;
 import in.eloksolutions.ala.dao.jdbc.MemberRowMapper;
 import in.eloksolutions.ala.model.Lot;
 import in.eloksolutions.ala.model.Member;
-
+import in.eloksolutions.ala.model.LotMember;
 import java.util.Date;
 import java.util.List;
 
@@ -96,7 +96,7 @@ public class LotDAOImpl extends HibernateDaoSupport implements LotDAO{
 		 return list;
 	}
 
-
+	
 	@Override
 	public int getLiftMemberCount(int lotid) {
 		  String sql = "SELECT count(*) FROM chitsdb.lot_members Where lot_id=? and auction_amt is null";
@@ -117,8 +117,10 @@ public class LotDAOImpl extends HibernateDaoSupport implements LotDAO{
 
 	@Override
 	public void deleteMember(int memrowid) {
-		//LotMember ent =(LotMember) getSessionFactory().getCurrentSession().load(LotMember.class, memrowid);
-		//getSessionFactory().getCurrentSession().delete(ent);
+		LotMember ent =(LotMember) getSessionFactory().getCurrentSession().load(LotMember.class, memrowid);
+	     getSessionFactory().getCurrentSession().delete(ent);
+	     
+	     
 	}
 
 	@Override

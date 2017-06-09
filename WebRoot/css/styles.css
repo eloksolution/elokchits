@@ -29,4 +29,18 @@
   width: 300px;
   background: #bfff80;
   border: 1px solid black;
+  .modal-header {
+    padding: 2px 16px;
+    background-color: #8080ff;
+    color: white;
+}
+
+.modal-body {padding: 2px 16px;}
+
+.modal-footer {
+    padding: 2px 16px;
+    background-color: #8080ff;
+    color: white;
+}
   </style>
+  

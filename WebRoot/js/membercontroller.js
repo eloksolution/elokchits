@@ -37,8 +37,9 @@ app.controller('memberCtrl', function($scope, $http) {
 	        
 	    })
 	    .then(function (response) {
-	    	alert("response is"+response);
-	    	$scope.members = response.data;}, 
+	    	
+	    	$scope.members = response.data;
+	    	$scope.memberscount = response.data.length;}, 
 	    function(response) { // optional
 	    	alert("member saved FAILED");
 	    });
@@ -60,6 +61,7 @@ app.controller('memberCtrl', function($scope, $http) {
 	    	 $scope.email=mem.email;
 	    	 $scope.address=mem.address;
 	    	 $scope.memId=mem.memId;
+	    	 $scope.refId=mem.refId;
 	    }, 
 	    function(response) { // optional
 	    	alert("member edited FAILED");
@@ -79,8 +81,8 @@ app.controller('memberCtrl', function($scope, $http) {
 	    	alert("member delete FAILED");
 	    });
 	};
-	$scope.memberview = function(memId){	
-		
+	$scope.memberview = function(){	
+		var memId=(location.search.split('memid=')[1] || '').split('&')[0];
 		$http({
 	        url: '/elokchits/member/memberEdit/'+memId,
 	        method: "GET",
@@ -96,6 +98,8 @@ app.controller('memberCtrl', function($scope, $http) {
 	    	 $scope.phone=mem.phone;
 	    	 $scope.email=mem.email;
 	    	 $scope.address=mem.address;
+	    	 $scope.referName=mem.referName;
+	    	 
 	    	 $scope.memId=mem.memId;
 	    }, 
 	    function(response) { // optional
@@ -109,7 +113,7 @@ app.controller('memberCtrl', function($scope, $http) {
 	        
 	    })
 	    .then(function (response) {
-	    	alert("response is"+response);
+	    	
 	    	$scope.users = response.data;}, 
 	    function(response) { // optional
 	    	alert("member saved FAILED");

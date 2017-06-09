@@ -12,7 +12,7 @@ public class Conversions {
 		//lotStatus
 		lotStatus.put(0, "Completed");
 		lotStatus.put(1, "Active");
-		lotStatus.put(2, "Partial");
+		lotStatus.put(2, "In Active");
 		
 		//PartnerName
 		

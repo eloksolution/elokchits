@@ -1,5 +1,7 @@
 package in.eloksolutions.ala.model;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 import java.io.Serializable;
 import javax.persistence.*;
 
@@ -15,6 +17,7 @@ public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	
 	@Column(name="user_id")
 	private String userId;
 

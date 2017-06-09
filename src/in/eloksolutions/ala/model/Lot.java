@@ -3,6 +3,7 @@ package in.eloksolutions.ala.model;
 import static javax.persistence.GenerationType.IDENTITY;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -187,6 +188,8 @@ public class Lot implements Serializable {
 	}
 
 	public void setStartDate(Date startDate) {
+		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+		String dateString=sdf.format(startDate);
 		this.startDate = startDate;
 	}
 	

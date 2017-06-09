@@ -119,17 +119,18 @@ public class AuctionController {
 	public List<Map<String, String>> getAllMembers(HttpServletRequest req) {
 		String q=req.getParameter("term");
 		String lotid=req.getParameter("lotid");
-		System.out.println("lotid is"+lotid);
+		System.out.println("lotid is"+lotid+"  and term  "+q);
 		List<MemberVO> mem=auctionService.searchMembers(q ,lotid);
 		List<Map<String, String>> data=new ArrayList<>();
 		for(MemberVO m:mem){
 			LinkedHashMap<String, String> map=new LinkedHashMap<>();
 			String lastName=Utils.trim(m.lastName);
-			//map.put("value", m.firstName+","+m.lastName+"-Slot #"+m.lotMemberId);
+			map.put("value", m.firstName+","+m.lastName+"-Slot #"+m.lotMemberId);
 			map.put("value", m.firstName+","+lastName+"-Slot #"+m.lotMemberId+"#"+m.lotCode);
 			map.put("id", m.lotMemberId);
 			data.add(map);
 		}
+		System.out.println("Data  is"+data);
 		return data;
 	}
 	@ResponseBody

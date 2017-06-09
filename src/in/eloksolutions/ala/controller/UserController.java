@@ -30,37 +30,38 @@ public class UserController {
 	//-------------------User Login--------------------------------------------------------
 	 @ResponseBody
 		@RequestMapping(value = "/add", method = RequestMethod.POST)
-		public  String addUser(HttpServletRequest request,HttpSession session,Model model){
+		public  String addUser(HttpServletRequest request,HttpSession session){
 			System.out.println("Request is coming");
-			//User user=(User)session.getAttribute("loginuser");
+			
 			String  firstName=request.getParameter("firstname");
 			String  lastName=request.getParameter("lastname");
 			String  userName=request.getParameter("email");
 			String  password=request.getParameter("password");
-			String  phone=request.getParameter("phonenumber");
-			User user=new User();
-	
-			user.setUserId(userName);
-			user.setFirstName(firstName);
-			user.setLastName(lastName);
-			user.setUserName(userName);
-			user.setPassword(password);
-			user.setPhone(phone);
+			String  phone=request.getParameter("phone");
+			System.out.println("singned up details"+lastName+"2"+lastName+"3"+userName+"4"+password+"5"+phone);
+
+			User users=new User();
+			users.setUserId(userName);
+			users.setFirstName(firstName);
+			users.setLastName(lastName);
+			users.setUserName(userName);
+			users.setPassword(password);
+			users.setPhone(phone);
 			
-			userService.addUser(user);
-			
+			userService.addUser(users);
+			System.out.println("singned up all details"+users);
 			return "success";
 		}
 	@ResponseBody
 	@RequestMapping(value = "/login")
-	public List<User> getLogin(HttpServletRequest request,Model model) {
-		String user=request.getParameter("username");
+	public String getLogin(HttpServletRequest request) {
+		String user=request.getParameter("email");
 		String pass=request.getParameter("password");
 		User loggedUser=userService.getLoginUser(user, pass);
 		if(loggedUser==null){
-			model.addAttribute("msg", "UserName , Password invalid.Please enter correct details.");
-			return (List<User>) loggedUser;
+			return "fail";
 		}
+		
 		List<User> users=userService.findAllUsers();
 		Map<String,String> userNames=new HashMap<String, String>();
 		for(User u:users){
@@ -70,8 +71,7 @@ public class UserController {
 		request.getSession().setAttribute("userNames", userNames);
 		request.getSession().setAttribute("loginuser", loggedUser);
 		System.out.println("-from session="+request.getSession().getAttribute("loginuser"));
-		model.addAttribute("loginuser",loggedUser);
-		return users;
+		return "success";
 		
 	}
 	

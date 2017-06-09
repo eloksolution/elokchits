@@ -1,14 +1,7 @@
 package in.eloksolutions.ala.controller;
 
-import in.eloksolutions.ala.model.Lot;
-import in.eloksolutions.ala.model.LotMember;
-import in.eloksolutions.ala.model.Member;
-import in.eloksolutions.ala.service.LotMemberService;
-import in.eloksolutions.ala.service.MemberService;
-import in.eloksolutions.ala.util.Utils;
-
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -20,7 +13,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.google.gson.Gson;
+import in.eloksolutions.ala.beans.LotDetailsVO;
+import in.eloksolutions.ala.beans.MemberVO;
+import in.eloksolutions.ala.model.LotMember;
+import in.eloksolutions.ala.service.LotMemberService;
+import in.eloksolutions.ala.service.MemberService;
+import in.eloksolutions.ala.util.Utils;
 
 @Controller
 @RequestMapping("/lotmember")
@@ -39,7 +37,7 @@ public class LotMemberController {
 		String  memId=request.getParameter("memId");
 		String memName=request.getParameter("memName");
 		String refId=request.getParameter("refId");
-		System.out.println("user from session refId memid"+refId+memId+lotId);
+		System.out.println("user from session refId memid"+refId+" memId"+memId+" lotId"+lotId);
 		LotMember mem=new LotMember();
 		mem.setLotId(Utils.setIntValue(lotId));
 		mem.setMemId(Utils.setIntValue(memId));
@@ -48,14 +46,26 @@ public class LotMemberController {
 		mem.setUpdatedDate(new Date());
 		lotMemberService.addMember(mem);
 			
-		return "";
+		return "success";
 	}
 	@ResponseBody
-	@RequestMapping(value = "/lotMember/{lotid}")
-	public LotMember lotEdit(@PathVariable("lotid") int lotid,Model model,HttpServletRequest request) {
-		System.out.println("Fetching all Lot with X00001 memberEdit " + lotid);
-		LotMember lotMember = lotMemberService.lotMembers(lotid);
+	@RequestMapping(value = "/lotMembers/{lotid}")
+	public List<LotMember> lotMembers(@PathVariable("lotid") int lotid,Model model,HttpServletRequest request) {
+		System.out.println("Fetching all Lot with X00001 lotmemberId " + lotid);
+		
+		List<LotMember> m= lotMemberService.findLotsMembers(lotid);
 	
-		return lotMember;
+		return m;
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/allLotMembers/{lotid}")
+	public List<MemberVO> allLotMembers(@PathVariable("lotid") int lotid) {
+		System.out.println("Fetching all Lot with X00001 lotMembersId " + lotid);
+		
+		List<MemberVO> lotMembers= lotMemberService.allLotMembers(lotid);
+		System.out.println("Fetching all Lot with X00001 alllotMembers " + lotMembers);
+		return lotMembers;
+	}
+	
 }

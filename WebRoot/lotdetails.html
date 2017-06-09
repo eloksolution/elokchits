@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="/elokchits/css/styles.css">
 
 </head>
-<body ng-app="lot" >
+<body ng-app="lot" ng-controller="lotCtrl">
 
 
 <nav class="navbar navbar-inverse" data-spy="affix" data-offset-top="197">
@@ -51,22 +51,15 @@ target="#myNavbar">
 </div>
 </nav>
 
-<h1  align="center">Lot Home</h1>
-<div ng-controller="lotCtrl" ng-init="lotView(lotId)">
+<h1  align="center">Lot Details</h1>
+<div ng-controller="lotCtrl" ng-init="lotView()">
    <div class="container-fluid" style="background-color:#e6f0ff;height:100px;">
-   <form class="form-inline">
-            <div class="form-group">
-                <label>Enter LotId No:</label>
-                <input type="text" class="form-control" autocomplete="on" class="form-control input-sm" ng-model="lotId">
-            </div>
-            <button class="btn btn-primary" ng-click="editLot(lotId)" data-toggle="modal" data-target="#searchLot">Search</button>
-       &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <label>Total No.of Lots:</label>
-        </form>
-   <div class="containe pull-right">
-  <!-- Trigger the modal with a button -->
-  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#mylotadd"> New Lot</button>
+   
+   <tr>  <td style="color:#FF0000";><b>Total Lot Members: {{memberTotalCount}}</b></td> </tr>  <br> <br>
+   <tr></td><td><b>Lifted Members:&nbsp;{{liftMembers}}</b></td> </tr>  <br> <br>
+   <tr> <td><b>Not Lifted Members: {{nonLiftMembers}}</b></td>  </tr>    <br>        
 </div>
-   </div>   
+  
    
     <table id="my-ajax-table" class="table table-bordered" width="80%" align="center" style="width:70%;">
   <tbody>
@@ -77,35 +70,72 @@ target="#myNavbar">
   <td style="text-align: left;">No. of Months</td><td style="text-align: left;">{{noOfMonths}}</td></tr>
    <tr><td style="text-align: left;">Commission</td><td style="text-align: left;">{{commission}}</td>
   <td style="text-align: left;">Status</td><td style="text-align: left;"> 
-   <select ng-model="status" id="members" tabindex="4" class="form-control input-sm">
+ <form type="submit">
+<select ng-model="status" id="members" tabindex="4" class="form-control input-sm">
   <option value="2">active</option>
   <option value="0">complete</option>
   <option value="1">Inactive</option>
  
 </select> 
-<p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" ng-click="statusUpdate(lotId)"  data-toggle="modal"  ><span class="glyphicon glyphicon-pencil"></span></button></p></td></tr>
+<p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" ng-click="statusUpdate(lotId)"   ><span class="glyphicon glyphicon-pencil"></span></button></p></form></td></tr>
   <tr><td style="text-align: left;">Description</td><td style="text-align: left;">{{description}}</td>
   <td style="text-align: left;">Start Date</td><td style="text-align: left;">
-            <input type="text" id="lotId" name="lotId" ng-model="startdate"/>
+   
+ 
+ 
+   
+
+	<input class="datepicker" type="text"  date date-format="short" ng-model="startdate" tabindex="7" required autocomplete="on"  class="form-control input-sm"/>
              <input type="hidden" id="lotId" name="lotId" ng-model="lotId"/>
-            <button type= "date"class="btn btn-primary btn-xs" data-title="Edit" ng-click="dateUpdate()"  data-toggle="modal"  ><span class="glyphicon glyphicon-pencil"></span></button></p> </td>
+            <button type= "date"class="btn btn-primary btn-xs" data-title="Edit" ng-click="dateUpdate(lotId)" ><span class="glyphicon glyphicon-pencil"></span></button></p> </td>
             
   </tr>
   
   </tbody>
 </table>   
-</div>
+
+
+<div  >
+         <form ng-submit="saveLotMember()" method="POST">
+       Add Member <input type="text" autocomplete="off" ng-model="memName" id="memid" class="ui-autocomplete-input">
+  <!-- Modal -->
+   
+         <button  type="submit" class="btn btn-primary">Add Member</button>
+</form>
 </div>
 
-         <form ng-submit="saveLotMember()" method="POST">
-        <table width="80%" align="center" style="width:80%;"><tr><td>Add Member <input type="text" autocomplete="off" ng-model="memName" id="memid"ng-click="memSearch()" class="ui-autocomplete-input">
-  <!-- Modal -->
-   <input type="hidden"  " class="form-control input-sm" ng-model="memId" placeholder="memId">
-  <input type="hidden"class="form-control input-sm" ng-model="memName" placeholder="Last Name">
-	   <input type="hidden"   class="form-control input-sm" ng-model="refId" placeholder="First Name">
-			    	
-<input type="button"  value="Add Member" id="addbtn" ng-click="saveLotMember()"></td></tr></table>
-</form>
+<table id="my-table" class="table table-bordered" width="80%" align="center" style="width:80%;">
+  <thead id="mem_list">
+  <th data-dynatable-column="name" class="dynatable-head">S.I.no</th>
+    <th data-dynatable-column="name" class="dynatable-head">Member Name</th>
+    <th data-dynatable-column="phone" class="dynatable-head">Phone</th>
+    <th data-dynatable-column="ref" class="dynatable-head">Referrer</th>
+    <th data-dynatable-column="address" class="dynatable-head">Address</th>
+     <th data-dynatable-column="address" class="dynatable-head">Auction Amount</th>
+      <th data-dynatable-column="address" class="dynatable-head">Paid Date</th>
+            <th data-dynatable-column="address" class="dynatable-head">Delete</th>
+      
+   </thead>
+    <tbody>
+   <tr ng-repeat="m in lotmembers track by $index">
+   <td style="text-align: left;">{{$index +1}}</td>
+   <td style="text-align: left;"><a>{{ m.firstName}}&nbsp;{{ m.firstName}}</a></td>
+      <td style="text-align: left;">{{m.phone}}</td>
+      <td style="text-align: left;">{{m.referName}}</td>
+      <td style="text-align: left;">{{m.address}}</td>
+       <td style="text-align: left;">{{m.auctionAmt}}</td>
+        <td style="text-align: left;">{{m.paidDate | date:"shortDate"}} </td> 
+      
+         <td><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" ng-click="deleteMembers(m.lotMemberId)" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></p></td>
+     
+  </tr>
+  </tbody>
+   
+</table>
+</div>
+
+  
+
 
 </body>
 </html>

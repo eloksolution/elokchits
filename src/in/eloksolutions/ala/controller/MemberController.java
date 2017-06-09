@@ -103,16 +103,17 @@ public class MemberController {
 				System.out.println("the name in cont"+term);
 				List<Member> member = membersService.searchByName(term);
 				List<Map<String,String>> list=new ArrayList<>();
-				Map<String,String> users=(Map<String,String>)request.getSession().getAttribute("userNames");
-				System.out.println("user from session "+users);
+				
+				//Map<String,String> users=(Map<String,String>)request.getSession().getAttribute("userNames");
+				//System.out.println("user from session "+users);
 			
 				for(Member m:member){
 					LinkedHashMap<String,String> map=new LinkedHashMap<>();
 					String nam="";
-				/*	if(m.getLastName()!=null)nam=m.getFirstName()+" "+m.getLastName()+"-"+users.get(m.getRefId()+"");
+					if(m.getLastName()!=null)nam=m.getFirstName()+" "+m.getLastName();
 					else
-						nam=m.getFirstName()+"-"+users.get(m.getRefId()+"");
-					System.out.println("ref name is  "+nam);*/
+						nam=m.getFirstName();//+"-"+users.get(m.getRefId()+"");
+					System.out.println("ref name is new  "+nam);
 					map.put("value",nam);
 					map.put("memId",m.getMemId()+"");
 					map.put("refId",m.getRefId()+"");

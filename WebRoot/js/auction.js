@@ -1,6 +1,7 @@
 var app = angular.module('auction', []);
 app.controller('auctionCtrl', function($scope, $http) {
-	
+	$scope.term = "";
+	$scope.lotid = "";
     $scope.saveLot = function(){		
     	var xsrf = $.param({'lotcode' : $scope.lotcode,commission :$scope.commission,startdate : $scope.startdate,sumamount : $scope.sumamount,
     		members : $scope.members,description : $scope.description,lottype :  $scope.lottype,beforeamount : $scope.beforeamount,afteramount : $scope.afteramount,lotId : $scope.lotId});
@@ -41,6 +42,23 @@ app.controller('auctionCtrl', function($scope, $http) {
 	    .then(function (response) {
 	    	alert("response is"+response);
 	    	$scope.auctions = response.data;}, 
+	    function(response) { // optional
+	    	alert("Auctions saved FAILED");
+	    });
+	};
+	
+	
+	$scope.memSearch = function(){	
+		
+		var xsrf = $.param({'term':$scope.term, lotid:$scope.lotid});
+		$http({
+	        url: '/elokchits/auction/searchMember',
+	        method: "GET",
+	        
+	    })
+	    .then(function (response) {
+	    	alert("response is"+response);
+	    	$scope.auctionsmembers = response.data;}, 
 	    function(response) { // optional
 	    	alert("Auctions saved FAILED");
 	    });

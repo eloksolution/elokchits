@@ -8,9 +8,25 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular.min.js"></script>
   <script src="/elokchits/js/userscontroller.js"></script>
-  <script src="/elokchits/resources/images"></script>
    <link rel="stylesheet" href="/elokchits/css/styles.css">
-  
+  <style>
+/* The Modal (background) */
+
+
+.modal-header {
+    padding: 2px 16px;
+    background-color:#337ab7;
+    color: white;
+}
+
+.modal-body {padding: 2px 16px;}
+
+.modal-footer {
+    padding: auto;
+    background-color: #337ab7;
+    color: white;
+}
+</style>
   
 </head>
 <body data-spy="scroll" data-target=".navbar" data-offset="50" ng-app="user" ng-controller="userCtrl">
@@ -52,7 +68,7 @@ target="#myNavbar">
 <div class="col-sm-4">
       <a href="membershome.html"> <div class="panel panel-primary">
        <div class="panel-heading">Members</div>
-       <div class="panel-body"><img src="WebRoot\resources\images\member.jpg" class="img-responsive" style="width:100%;height:10%" alt="Image"></div>
+       <div class="panel-body"><img  src="./resources/images/addmember.jpg" class="img-responsive" style="width:304px;height:228px; alt="Image"></div>
        <div class="panel-footer">Add members Here</div>
       </div></a>
       
@@ -60,7 +76,7 @@ target="#myNavbar">
 <div class="col-sm-4">
       <a href="lothome.html"> <div class="panel panel-primary">
        <div class="panel-heading">Lot Details</div>
-       <div class="panel-body"><img src="\resources\images\member.jpg" class="img-responsive" style="width:100%" alt="Image"></div>
+       <div class="panel-body"><img  src="./resources/images/member.jpg" class="img-responsive" style="width:304px;height:228px; alt="Image"></div>
        <div class="panel-footer">Lot Information</div>
       </div></a>
       
@@ -68,9 +84,7 @@ target="#myNavbar">
 <div class="col-sm-4">
       <a href="partner.html"> <div class="panel panel-primary">
        <div class="panel-heading">partners</div>
-       <div class="panel-body"><img src="elokchits\WebRoot\resources\images
-
-\partners.png" class="img-responsive" style="width:100%" alt="Image"></div>
+       <div class="panel-body"><img  src="./resources/images/partners.png" class="img-responsive" style="width:304px;height:228px; alt="Image"></div>
        <div class="panel-footer">your partner's information</div>
       </div></a>
 </div>
@@ -81,9 +95,7 @@ target="#myNavbar">
 <div class="col-sm-4">
       <a href="auctionhome.html"> <div class="panel panel-primary">
        <div class="panel-heading">Auction Home</div>
-       <div class="panel-body"><img src="elokchits\WebRoot\resources\images
-
-\loan.jpg" class="img-responsive" style="width:100%" alt="Image"></div>
+       <div class="panel-body"><img  src="./resources/images/loan.jpg" class="img-responsive" style="width:304px;height:228px;" alt="Image"></div>
        <div class="panel-footer">Auction Related information</div>
       </div></a>
       
@@ -91,8 +103,7 @@ target="#myNavbar">
 <div class="col-sm-4">
       <a href="billgeneration.html"> <div class="panel panel-primary">
        <div class="panel-heading">Bill Generation</div>
-       <div class="panel-body"><img src="elokchits\WebRoot\resources\images
-\bill.jpg" class="img-responsive" style="width:100%" alt="Image"></div>
+       <div class="panel-body"><img src="./resources/images/bill.jpg" class="img-responsive" style="width:304px;height:228px; alt="Image"></div>
        <div class="panel-footer">Generates Bill Here</div>
       </div></a>
       
@@ -100,9 +111,7 @@ target="#myNavbar">
 <div class="col-sm-4">
       <a href="reports.html"> <div class="panel panel-primary">
        <div class="panel-heading">Reports</div>
-       <div class="panel-body"><img src="elokchits\WebRoot\resources\images
-
-\reports.jpg" class="img-responsive" style="width:100%" alt="Image"></div>
+       <div class="panel-body"><img  src="./resources/images/reports.jpg" class="img-responsive" style="width:304px;height:228px; alt="Image"></div>
        <div class="panel-footer">Reports information</div>
       </div></a>
 </div>
@@ -126,7 +135,7 @@ target="#myNavbar">
 			    			<div class="row">
 			    				<div class="col-xs-6 col-sm-6 col-md-6">
 			    					<div class="form-group">
-			                <input type="text" ng-model="firstname" id="firstname" class="form-control input-sm" placeholder="First Name">
+			                <input type="text" ng-model="firstname"  class="form-control input-sm" placeholder="First Name">
 			    					</div>
 			    				</div>
 			    				<div class="col-xs-6 col-sm-6 col-md-6">
@@ -177,9 +186,9 @@ target="#myNavbar">
     </div>
   </div>
   
-<</div>
+</div>
 
-<div class="sign in" ng-init="logIn()">
+<div class="sign in">
  
   <!-- Trigger the modal with a button -->
 
@@ -198,7 +207,7 @@ target="#myNavbar">
 <div class="col-xs-6 col-sm-6 col-md-6">
 <div class="form-group">
 <label for="email">Email address:</label>
-	<input type="email" name="email" id="email" class="form-control input-sm" placeholder="Email Address">
+	<input type="email" name="email" ng-model="email" id="email" class="form-control input-sm" placeholder="Email Address">
     </div>
      </div>
       </div>
@@ -206,7 +215,7 @@ target="#myNavbar">
  <div class="col-xs-6 col-sm-6 col-md-6">
  <div class="form-group">
  <label for="password">Password:</label>
-<input type="password" name="password" id="password" class="form-control input-sm" placeholder="Password">
+<input type="password" name="password" ng-model="password" class="form-control input-sm" placeholder="Password">
 </div>
 </div>
  </div>

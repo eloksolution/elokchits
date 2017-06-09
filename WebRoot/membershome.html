@@ -17,6 +17,24 @@
       <script src="/elokchits/js/membercontroller.js"></script>
       
     <link rel="stylesheet" href="/elokchits/css/styles.css">
+    <style>
+/* The Modal (background) */
+
+
+.modal-header {
+    padding: 2px 16px;
+    background-color:#337ab7;
+    color: white;
+}
+
+.modal-body {padding: 2px 16px;}
+
+.modal-footer {
+    padding: 2px 16px;
+    background-color: #337ab7;
+    color: white;
+}
+</style>
 </head>
 <body>
 
@@ -43,7 +61,7 @@ target="#myNavbar">
           <li><a href="auctionhome.html">Auction Home</a></li>
           <li><a href="billgeneration.html">Bill Generation</a></li>
           <li><a href="reports.html">Reports</a></li>
-          <li><a href="#" type="submit" class="s" data-toggle="modal" data-target="#myModal">Sign Up</a></li>
+          <li><a href="#" type="submit" class="s" data-toggle="modal" data-target="">Sign Up</a></li>
            <li><a type="submit" class="signin " data-toggle="modal" data-target="#signin">Sign IN</a>
            </li>
         </ul>
@@ -60,7 +78,7 @@ target="#myNavbar">
                 <input type="text" class="form-control" autocomplete="on" class="form-control input-sm" ng-model="memId">
             </div>
             <button class="btn btn-primary" ng-click="editMember(memId)" data-toggle="modal" data-target="#searchMem">Search</button>
-       &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <strong >Total no.o Members :<strong>
+       &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Total no.o Members :{{memberscount}}
         </form>
  
  
@@ -137,7 +155,7 @@ target="#myNavbar">
 		 </form>	 	    			
       </div>
         <div class="modal-footer">
-         <button ng-click="saveMember" type="submit" class="savemember btn btn-primary">SaveMember</button>
+         <button ng-click="saveMember" type="submit" class="savemember btn btn-primary">Save Member</button>
          
           <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
         </div>
@@ -213,7 +231,8 @@ target="#myNavbar">
     <th type="button" data-dynatable-column="address" class="dynatable-head">Delete</th>
    </thead>
   <tbody>  
-   <tr ng-repeat="m in members track by $index"><td style="text-align: left;">{{$index +1}}</td><td style="text-align: left;"><a  ng-click="memberview(m.memId)" data-toggle="modal" data-target="#searchMem">{{ m.firstName}},{{ m.lastName}}</a></td><td style="text-align: left;">{{m.address}}</td><td style="text-align: left;">{{m.referName}}</td><td style="text-align: left;">{{m.phone}}</td> <td><p data-placement="top" data-toggle="tooltip"  title="Edit"><button class="btn btn-primary btn-xs" ng-click="editMember(m.memId)" data-target="#myModal" data-title="Edit" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button></p></td>
+   <tr ng-repeat="m in members track by $index"><td style="text-align: left;">{{$index +1}}</td><td style="text-align: left;"><a  href="memberdetails.html?memid={{m.memId}}">{{ m.firstName}},{{ m.lastName}}</a></td><td style="text-align: left;">{{m.address}}</td><td style="text-align: left;">{{m.referName}}</td><td style="text-align: left;">{{m.phone}}</td> 
+   <td><p data-placement="top" data-toggle="tooltip"  title="Edit"><button class="btn btn-primary btn-xs" ng-click="editMember(m.memId)" data-target="#myModal" data-title="Edit" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button></p></td>
     <td><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" ng-click="deleteMember(m.memId)" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></p></td>
   
     </tr>

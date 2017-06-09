@@ -74,9 +74,9 @@ public class UserDAOImpl extends HibernateDaoSupport implements UserDAO {
 		Query query=getSessionFactory().getCurrentSession().createQuery(sql);
 		return query.list();
 	}
-	public void add(User user) {
-		sessionFactory.getCurrentSession().save(user);
+	public void add(User users) {
+		sessionFactory.getCurrentSession().save(users);
 		sessionFactory.getCurrentSession().flush();
-		System.out.println("after flush "+user);
+		System.out.println("after flush "+users);
 	}
 }

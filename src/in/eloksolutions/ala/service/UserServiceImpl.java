@@ -35,8 +35,8 @@ public class UserServiceImpl implements UserService {
 		return userDAO.findAllUsers();
 	}
 
-	public void addUser(User user) {
-		userDAO.add(user);
+	public void addUser(User users) {
+		userDAO.add(users);
 		
 	}
 }

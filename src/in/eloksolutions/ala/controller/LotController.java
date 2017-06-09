@@ -33,7 +33,7 @@ public class LotController {
 	//-------------------add Lot--------------------------------------------------------
 	@ResponseBody
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String addLot(HttpServletRequest request,Model model){
+	public String addLot(HttpServletRequest request){
 		System.out.println("Request is coming");
 		String  code=request.getParameter("lotcode");
 		String  amount=request.getParameter("sumamount");
@@ -98,21 +98,30 @@ public class LotController {
 	//-------------------Retrieve single lot details--------------------------------------------------------
 	@ResponseBody
 	@RequestMapping(value = "/search/{lotid}")
-	public Lot getlot(@PathVariable("lotid") int lotid,Model model,HttpServletRequest req) {
+	public Lot getlot(@PathVariable("lotid") int lotid,HttpServletRequest req, Model model) {
 		System.out.println("Fetching lot details with X00001  " +lotid);
 		List<MemberVO> m=lotService.searchlotMembers(lotid);
+		
+	int liftMember =0, nonLiftMembers=0;
+		
 		if(m!=null){
 			Map<String,String> users=(Map<String,String>)req.getSession().getAttribute("userNames");
 			System.out.println("user from session "+users);
 		for(MemberVO mem:m){
-			//mem.setReferName(users.get(mem.getRefId()+""));
+			mem.setReferName(users.get(mem.getRefId()+""));
+			if(mem.paidDate!=null){
+			liftMember++;
+			}
 		}
 		}
+		
 		System.out.println("the list of members in cont"+m);
 		Lot lot = lotService.searchById(lotid);
 		lot.setStatusName(Conversions.lotStatus.get(lot.getStatus()));
-		model.addAttribute("lot",lot);
-		model.addAttribute("mem",m);
+		model.addAttribute("memberTotalCount",m.size());
+		model.addAttribute("liftMembers",liftMember);
+		model.addAttribute("nonLiftMembers",m.size()-liftMember);
+		
 		return lot;
 	}
 	
@@ -129,7 +138,7 @@ public class LotController {
 		return lots;
 	}
 		@ResponseBody
-		@RequestMapping(value = "/dateupdate/{lotid}")
+		@RequestMapping(value = "/dateupdate/{lotid}", method = RequestMethod.POST)
 		public String dateUpdate(@PathVariable("lotid") int lotid,Model model,HttpServletRequest req) {
 			System.out.println("Fetching lot details with X00001  " +lotid);
 			String  startDate=req.getParameter("startdate");
@@ -149,7 +158,7 @@ public class LotController {
 		
 		@ResponseBody
 		@RequestMapping(value = "/deletemember/{memrowid}")
-		public String deleteMember(@PathVariable("memrowid") int memrowid,Model model) {
+		public String deleteMember(@PathVariable("memrowid") int memrowid) {
 			System.out.println("member id is"+memrowid);
 			lotService.deleteMember(memrowid);
 			return "success";
@@ -167,12 +176,12 @@ public class LotController {
 		public Lot lotEdit(@PathVariable("lotid") int lotid,Model model,HttpServletRequest request) {
 			System.out.println("Fetching all Lot with X00001 memberEdit " + lotid);
 			Lot lots = lotService.searchById(lotid);
-			model.addAttribute("lot",lots);
+			
 			return lots;
 		}
 		@ResponseBody
-		@RequestMapping(value = "/statusUpdated/{lotid}")
-		public String statusUpdate(@PathVariable("lotid") int lotid,Model model,HttpServletRequest req) {
+		@RequestMapping(value = "/statusUpdated/{lotid}", method=RequestMethod.POST )
+		public String statusUpdate(@PathVariable("lotid") int lotid,HttpServletRequest req) {
 			System.out.println("Fetching lot details with X00001  " +lotid);
 			
 			String  status=req.getParameter("status");

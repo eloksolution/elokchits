@@ -3,13 +3,14 @@ app.controller('userCtrl', function($scope, $http) {
 	 
     $scope.firstname = "";
     $scope.lastname = "";
+    $scope.email = "";
     $scope.phone = "";
     $scope.password = "";
-    $scope.email = "";
+   
     
     $scope.saveUser = function(){		
-    	var xsrf = $.param({'firstname' :  $scope.firstname,lastname :$scope.lastname,phone : $scope.phonenumber,
-    		address : $scope.address,email : $scope.email});
+    	var xsrf = $.param({'firstname' :  $scope.firstname,lastname :$scope.lastname,email : $scope.email,phone : $scope.phonenumber,
+    		password : $scope.password});
 		
 		$http({
 	        url: '/elokchits/user/add',
@@ -18,19 +19,18 @@ app.controller('userCtrl', function($scope, $http) {
 	        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
 	    })
 	    .then(function(response) {
-	    	alert("member saved successfully", {timeOut: 5000});
+	    	alert("member saved successfully");
 	    }, 
 	    function(response) { // optional
-	    	alert("member saved FAILED", {timeOut: 5000});
+	    	alert("member saved FAILED");
 	    });
 		
 		
 		
 	};
 	$scope.logIn = function(){
-		 $scope.password = "";
-		    $scope.email = "";
-		    var xsrf = $.param({address : $scope.address,email : $scope.email});
+		
+		    var xsrf = $.param({password : $scope.password,email : $scope.email});
 			
 			$http({
 		        url: '/elokchits/user/login',
@@ -39,12 +39,20 @@ app.controller('userCtrl', function($scope, $http) {
 		        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
 		    })
 		    .then(function(response) {
-		    	alert("loin  successfully", {timeOut: 5000});
+		    	var msg=response.data;
+		    	if(msg=='success')
+		    	alert("loin  successfully");
+		    	else{
+		    		alert("UserId or Password is invalid");
+		    		$("#email").focus();
+		    	}
+		    		
 		    }, 
 		    function(response) { // optional
-		    	alert("log in failed", {timeOut: 5000});
+		    	alert("log in failed");
 		    });
 	};
+	
 	
 	$scope.getMember = function(){	
 		$http({

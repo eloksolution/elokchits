@@ -119,7 +119,7 @@ public class AuctionDAOImpl extends HibernateDaoSupport implements AuctionDAO {
 
 	@Override
 	public List<MemberVO> searchMembers(String q ,String lotid) {
-		String SQL = "SELECT L.code,LM.id,LM.lot_id,M.first_name,M.last_name FROM chitsdb.lot_members LM,chitsdb.members M,LOT L where L.lot_id=? AND (M.first_name like ? or M.last_name like ?) and M.status=1 and LM.mem_id=M.mem_id and LM.lot_id=L.lot_id and LM.paid_date IS  NULL;";
+		String SQL = "SELECT L.code,LM.id,LM.lot_id,M.first_name,M.last_name FROM elokchitsdb.lot_members LM,elokchitsdb.members M,LOT L where L.lot_id=? AND (M.first_name like ? or M.last_name like ?) and M.status=1 and LM.mem_id=M.mem_id and LM.lot_id=L.lot_id and LM.paid_date IS  NULL;";
 	      return jdbcTemplate.query(SQL,new Object[] { lotid,"%"+q+"%","%"+q+"%"}, new MemberMapper());
 	}
 

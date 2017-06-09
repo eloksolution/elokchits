@@ -10,6 +10,6 @@ public interface UserService {
 
 	List<User> findAllUsers();
 
-	public abstract void addUser(User user);
+	public abstract void addUser(User users);
 
 }
